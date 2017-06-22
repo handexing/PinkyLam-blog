@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>pinkylam笔记</title>
+		
+	<link rel="stylesheet" href="../resource/plugins/mdui/css/mdui.min.css" />
+	<link rel="stylesheet" href="../resource/css/index.css" />
+	
+	</head>
+	
+	<body class="mdui-appbar-with-toolbar">
+		<!--head menu-->
+		<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+		  	<div class="mdui-toolbar mdui-color-indigo">
+			    <a href="javascript:;" class="mdui-btn mdui-btn-icon" id="toggle"><i class="mdui-icon material-icons">&#xe5d2;</i></a>
+			   	<a href="javascript:;" class="mdui-typo-headline">Handx</a>
+			    <div class="mdui-toolbar-spacer"></div>
+			    <div class="mdui-textfield mdui-textfield-expandable">
+					<button class="mdui-textfield-icon mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe8b6;</i></button>
+					<input class="mdui-textfield-input" type="text" placeholder="请输入你要搜索的文章标题..."/>
+					<button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe5cd;</i></button>
+				</div>
+			    <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe5d5;</i></a>
+			    <a href="javascript:;" class="mdui-btn mdui-btn-icon" id="settingBtn"><i class="mdui-icon material-icons">&#xe5d4;</i></a>
+		  		<ul class="mdui-menu" id="setting_menu">
+				 	<li class="mdui-menu-item">
+				    	<a href="javascript:;" class="mdui-ripple">
+				      		<i class="mdui-menu-item-icon mdui-icon material-icons">&#xe417;</i>个人设置
+				    	</a>
+				  	</li>
+				  	<li class="mdui-divider"></li>
+				  	<li class="mdui-menu-item">
+				    	<a href="login.html" class="mdui-ripple">
+				    		<i class="mdui-menu-item-icon mdui-icon material-icons">&#xe6dd;</i>退出登录
+				    	</a>
+				  	</li>
+				</ul>
+		  	</div>
+		</div>
+		<!--left menu-->
+		<div class="mdui-drawer-body-left" style="padding-top: 20px;">
+			<div class="mdui-drawer" id="drawer">
+  				<ul class="mdui-list" mdui-collapse="{accordion: true}">
+				  	<li class="mdui-list-item mdui-ripple">
+					    <i class="mdui-list-item-icon mdui-icon material-icons">&#xe88a;</i>
+					    <div class="mdui-list-item-content">首页面板</div>
+				  	</li>
+				  	<li class="mdui-collapse-item mdui-collapse-item-open">
+					    <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+					      <i class="mdui-list-item-icon mdui-icon material-icons">&#xe7fb;</i>
+					      <div class="mdui-list-item-content">个人笔记</div>
+					      <i class="mdui-collapse-item-arrow mdui-icon material-icons">&#xe313;</i>
+					    </div>
+					    <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
+					      <li class="mdui-list-item mdui-ripple">JAVA</li>
+					      <li class="mdui-list-item mdui-ripple">spring</li>
+					      <li class="mdui-list-item mdui-ripple">数据库</li>
+					    </ul>
+				  	</li>
+				</ul>
+			</div>
+		</div>
+		<!--弹出菜单-->
+		<div class="mdui-fab-wrapper" id="fab">
+		    <button class="mdui-fab mdui-ripple mdui-color-pink-accent">
+		      	<i class="mdui-icon material-icons">&#xe145</i>
+		      	<i class="mdui-icon mdui-fab-opened material-icons">&#xe254</i>
+		    </button>
+    		<div class="mdui-fab-dial">
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink"><i class="mdui-icon material-icons">&#xe864</i></button>
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red"><i class="mdui-icon material-icons">&#xe866</i></button>
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange"><i class="mdui-icon material-icons">&#xe191</i></button>
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue"><i class="mdui-icon material-icons">&#xe913</i></button>
+    		</div>
+  		</div>
+  		
+	</body>
+	<script type="text/javascript" src="../resource/js/jquery.min.js" ></script>
+	<script type="text/javascript" src="../resource/plugins/mdui/js/mdui.js" ></script>
+	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
+	
+	<script type="application/javascript">
+		
+		var inst = new mdui.Drawer('#drawer');
+		var fab = new mdui.Fab('#fab');
+		var menu = new mdui.Menu('#settingBtn', '#setting_menu');
+		
+		document.getElementById('settingBtn').addEventListener('click', function () {
+		  	menu.open();
+		});
+				
+		//左侧菜单
+		document.getElementById('toggle').addEventListener('click', function () {
+		  	inst.toggle();
+		});
+	</script>
+</html>

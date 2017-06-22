@@ -1,0 +1,24 @@
+ {
+      "main" : "view/login.html",
+      "name" : "test",
+      "description" : "demo app of node-webkit",
+  		"version" : "0.1.0",
+  		"keywords" : [ "demo", "node-webkit" ],
+      "window" : {
+            "title" : "hahahah",
+				    "icon"  : "resource/img/pinkylam.png",
+				    "toolbar" : false,
+				    "frame"   : true,
+				    "width"   : 1200,
+				    "height"  : 800,
+				    "position":"center",
+				    "min_width"  : 800,
+				    "min_height" : 400,
+				    "max_width"  : 1200,
+				    "max_height" : 800
+       },
+  		"webkit": {
+    			"plugin": true
+  		}
+
+}
