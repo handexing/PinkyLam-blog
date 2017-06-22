@@ -9,12 +9,12 @@
 				    "icon"  : "resource/img/pinkylam.png",
 				    "toolbar" : false,
 				    "frame"   : true,
-				    "width"   : 1200,
+				    "width"   : 1300,
 				    "height"  : 800,
 				    "position":"center",
 				    "min_width"  : 800,
 				    "min_height" : 400,
-				    "max_width"  : 1200,
+				    "max_width"  : 1300,
 				    "max_height" : 800
        },
   		"webkit": {
