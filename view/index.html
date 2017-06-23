@@ -39,12 +39,12 @@
 		  	</div>
 		</div>
 		<!--left menu-->
-		<div class="mdui-drawer-body-left" style="padding-top: 20px;">
+		<div class="mdui-drawer-body-left">
 			<div class="mdui-drawer" id="drawer"style="background: #FAFAFA;">
   				<ul class="mdui-list" mdui-collapse="{accordion: true}">
 				  	<li class="mdui-list-item mdui-ripple">
 					    <i class="mdui-list-item-icon mdui-icon material-icons">&#xe88a;</i>
-					    <div class="mdui-list-item-content">首页面板</div>
+					    <div class="mdui-list-item-content" id="home_panel">首页面板</div>
 				  	</li>
 				  	<li class="mdui-collapse-item mdui-collapse-item-open">
 					    <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
@@ -75,45 +75,8 @@
     		</div>
   		</div>
   		
-  		<div style="height: 710px;">
-  			<div class="mdui-tab mdui-tab-full-width" mdui-tab>
-			  	<a href="#tab1-content" id="tab1" class="mdui-ripple">近期笔记</a>
-			  	<a href="#tab2-content" id="tab2" class="mdui-ripple">时间线</a>
-			  	<a href="#tab3-content" id="tab3" class="mdui-ripple">日历</a>
-			</div>
-			
-			<div id="tab1-content" class="mdui-p-a-2">
-				<div class="mdui-card mdui-col-xs-3">
-
-				  <!-- 卡片的媒体内容，可以包含图片、视频等媒体内容，以及标题、副标题 -->
-				  <div class="mdui-card-media">
-				    <img src="../resource/img/head.gif"/>
-				    
-				    <!-- 卡片中可以包含一个或多个菜单按钮 -->
-				    <div class="mdui-card-menu">
-				      <button class="mdui-btn mdui-btn-icon mdui-text-color-white"><i class="mdui-icon material-icons">&#xe80d;</i></button>
-				    </div>
-				  	<div class="mdui-card-media-covered">
-				      <div class="mdui-card-primary">
-				        <div class="mdui-card-primary-title">实时日志分析系统</div>
-				      </div>
-				    </div>
-				  </div>
-				  
-				  <!-- 卡片的内容 -->
-				  <div class="mdui-card-content">做这个系统的出发点很简单，就是在做大促活动期间，运营的同事希望能实时看到用户的行为数据和订单的情况</div>
-				  
-				  <!-- 卡片的按钮 -->
-				  <div class="mdui-card-actions">
-				    <button class="mdui-btn mdui-ripple">java</button>
-				    <button class="mdui-btn mdui-ripple">spring</button>
-				    <button class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">&#xe417;</i></button>
-				  </div>
-				  
-				</div>
-			</div>
-			<div id="tab2-content" class="mdui-p-a-2">还没开发</div>
-			<div id="tab3-content" class="mdui-p-a-2">也是没有</div>
+  		<div style="height: 730px;" style="border: 1px solid red;">
+  			<iframe id="m_Iframe" frameborder="0" width="100%" height="100%" marginheight="0" marginwidth="0" scrolling="no"></iframe>
   		</div>
   		
 	</body>
@@ -128,7 +91,12 @@
 		var menu = new mdui.Menu('#settingBtn', '#setting_menu');
 		
 		$(function(){
-			 inst.close();
+			inst.close();//隐藏侧边菜单
+			$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
+			
+			$('#home_panel').bind('click',function(){
+				$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
+			});
 		});
 
 		document.getElementById('settingBtn').addEventListener('click', function () {
@@ -139,7 +107,6 @@
 		document.getElementById('toggle').addEventListener('click', function () {
 		  	inst.toggle();
 		});
-		 
 		
 
 	</script>

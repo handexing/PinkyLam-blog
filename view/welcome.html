@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>pinkylam笔记</title>
+		
+		<link rel="stylesheet" href="../resource/plugins/mdui/css/mdui.min.css" />
+		<link rel="stylesheet" href="../resource/css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../resource/plugins/simple-calendar/simple-calendar.css">
+	
+	</head>
+	<body>
+		<div class="mdui-tab mdui-tab-full-width" mdui-tab>
+			<a href="#tab1-content" id="tab1" class="mdui-ripple">近期笔记</a>
+			<a href="#tab2-content" id="tab2" class="mdui-ripple">时间线</a>
+			<a href="#tab3-content" id="tab3" class="mdui-ripple">日历/提醒</a>
+		</div>
+			
+		<div id="tab1-content" class="mdui-p-a-2">
+			<div class="mdui-card mdui-col-xs-3">
+				<!-- 卡片的媒体内容，可以包含图片、视频等媒体内容，以及标题、副标题 -->
+				<div class="mdui-card-media">
+				    <img src="../resource/img/head.gif"/>
+				    <!-- 卡片中可以包含一个或多个菜单按钮 -->
+				    <div class="mdui-card-menu">
+				      	<button class="mdui-btn mdui-btn-icon mdui-text-color-white"><i class="mdui-icon material-icons">&#xe80d;</i></button>
+				    </div>
+				  	<div class="mdui-card-media-covered">
+				      	<div class="mdui-card-primary">
+				        	<div class="mdui-card-primary-title">实时日志分析系统</div>
+				      	</div>
+				    </div>
+				</div>
+				<!-- 卡片的内容 -->
+				<div class="mdui-card-content">做这个系统的出发点很简单，就是在做大促活动期间，运营的同事希望能实时看到用户的行为数据和订单的情况</div>
+				<!-- 卡片的按钮 -->
+				<div class="mdui-card-actions">
+				    <button class="mdui-btn mdui-ripple">java</button>
+				    <button class="mdui-btn mdui-ripple">spring</button>
+				    <button class="mdui-btn mdui-btn-icon mdui-float-right"><i class="mdui-icon material-icons">&#xe417;</i></button>
+				</div>
+			</div>
+		</div>
+		<div id="tab2-content" class="mdui-p-a-2">还没开发</div>
+		<div id="tab3-content" class="mdui-p-a-2">
+			<div style="float: left;width: 350px;">
+				
+				<div class="mdui-list">
+
+			  		<label class="mdui-list-item mdui-ripple">
+			    		<div class="mdui-list-item-avatar mdui-color-pink">1</div>
+			    		<div class="mdui-list-item-content">今天在写一篇博客</div>
+			    		<div class="mdui-checkbox">
+			      			<input type="checkbox" checked/>
+			      			<i class="mdui-checkbox-icon"></i>
+			    		</div>
+			  		</label>
+			  		<label class="mdui-list-item mdui-ripple">
+			    		<div class="mdui-list-item-avatar mdui-color-red">2</div>
+			    		<div class="mdui-list-item-content">下班去药店买药</div>
+			    		<div class="mdui-checkbox">
+			      			<input type="checkbox"/>
+			      			<i class="mdui-checkbox-icon"></i>
+			    		</div>
+			  		</label>
+			  		<label class="mdui-list-item mdui-ripple">
+			    		<div class="mdui-list-item-avatar mdui-color-orange">3</div>
+			    		<div class="mdui-list-item-content">下班去买苹果香蕉</div>
+			    		<div class="mdui-checkbox">
+			      			<input type="checkbox"/>
+			      			<i class="mdui-checkbox-icon"></i>
+			    		</div>
+			  		</label>
+			  		<label class="mdui-list-item mdui-ripple">
+			    		<div class="mdui-list-item-avatar mdui-color-blue">4</div>
+			    		<div class="mdui-list-item-content">洗被单刷鞋</div>
+			    		<div class="mdui-checkbox">
+			      			<input type="checkbox"/>
+			      			<i class="mdui-checkbox-icon"></i>
+			    		</div>
+			  		</label>
+			  		<label class="mdui-list-item mdui-ripple">
+			    		<div class="mdui-list-item-avatar mdui-color-brown">5</div>
+			    		<div class="mdui-list-item-content">找一部好看的电影</div>
+			    		<div class="mdui-checkbox">
+			      			<input type="checkbox"/>
+			      			<i class="mdui-checkbox-icon"></i>
+			    		</div>
+			  		</label>
+			  		<label class="mdui-list-item mdui-ripple">
+			    		<div class="mdui-list-item-avatar mdui-color-deep-purple">6</div>
+			    		<div class="mdui-list-item-content">和对象聊天</div>
+			    		<div class="mdui-checkbox">
+			      			<input type="checkbox"/>
+			      			<i class="mdui-checkbox-icon"></i>
+			    		</div>
+			  		</label>
+				</div>
+			</div>
+			<div id='m_calendar' style="float: right;margin-top: 20px;"></div>
+		</div>
+	</body>
+	
+	<script type="text/javascript" src="../resource/js/jquery.min.js" ></script>
+	<script type="text/javascript" src="../resource/plugins/mdui/js/mdui.js" ></script>
+	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
+	<script type="application/javascript" src="../resource/plugins/simple-calendar/simple-calendar.js"></script>
+	
+	<script type="application/javascript">
+		
+		var myCalendar = new SimpleCalendar('#m_calendar');
+		var options = {
+		    language: 'CH', //语言
+		    showLunarCalendar: true, //阴历
+		    showHoliday: true, //休假
+		    showFestival: true, //节日
+		    showLunarFestival: true, //农历节日
+		    showSolarTerm: true, //节气
+		    showMark: true, //标记
+		    timeRange: {
+		    	startYear: 1900,
+		        endYear: 2049
+		    },
+		    theme: {
+		        changeAble: false,
+		        weeks: {
+		          	backgroundColor: '#ffffff',
+		          	fontColor: '#4A4A4A',
+		          	fontSize: '20px',
+		        },
+		        days: {
+		          	backgroundColor: '#ffffff',
+		          	fontColor: '#565555',
+		          	fontSize: '24px'
+		        },
+		        todaycolor: 'orange',
+		        activeSelectColor: 'orange',
+		    }
+		}
+		
+		myCalendar.updateSize('500px', '300px');
+		myCalendar.addMark('2017-6-22', 'hahahhahahah');
+		
+	</script>
+	
+</html>
