@@ -11,8 +11,8 @@
 	</head>
 	<body>
 		<div class="mdui-tab mdui-tab-full-width" mdui-tab>
+			<a href="#tab2-content" id="tab2" class="mdui-ripple">仪表盘</a>
 			<a href="#tab1-content" id="tab1" class="mdui-ripple">近期笔记</a>
-			<a href="#tab2-content" id="tab2" class="mdui-ripple">时间线</a>
 			<a href="#tab3-content" id="tab3" class="mdui-ripple">日历/提醒</a>
 		</div>
 			
@@ -41,7 +41,36 @@
 				</div>
 			</div>
 		</div>
-		<div id="tab2-content" class="mdui-p-a-2">还没开发</div>
+		<div id="tab2-content" class="mdui-p-a-2 mdui-row-xs-4">
+			<div class="statistics_panel mdui-col mdui-color-pink mdui-shadow-5 mdui-hoverable mdui-img-rounded">
+				<i class="mdui-icon material-icons" style="font-size: 40px;">&#xe0e0;</i>
+				<div class="mdui-text-center">
+					<b style="font-size: 40px;">36</b>&nbsp;(篇)
+				</div>
+				<div style="margin-top: 40px;">已经写了36篇文章了，继续努力！</div>
+			</div>
+			<div class="statistics_panel mdui-col mdui-color-red mdui-shadow-5 mdui-hoverable mdui-img-rounded">
+				<i class="mdui-icon material-icons" style="font-size: 40px;">&#xe2bc;</i>
+				<div class="mdui-text-center">
+					<b style="font-size: 40px;">48</b>&nbsp;(个)
+				</div>
+				<div style="margin-top: 40px;">已经上传了48个附件！</div>
+			</div>
+			<div class="statistics_panel mdui-col mdui-color-orange mdui-shadow-5 mdui-hoverable mdui-img-rounded">
+				<i class="mdui-icon material-icons" style="font-size: 40px;color: white;">&#xe192;</i>
+				<div class="mdui-text-center">
+					<b style="font-size: 40px;color: white;">56</b>&nbsp;<span style="color: white;">(分钟)</span>
+				</div>
+				<div style="margin-top: 40px;color: white;">写作时间大概已经花费56分钟！</div>
+			</div>
+			<div class="statistics_panel mdui-col mdui-color-blue mdui-shadow-5 mdui-hoverable mdui-img-rounded">
+				<i class="mdui-icon material-icons" style="font-size: 40px;">&#xe80d;</i>
+				<div class="mdui-text-center">
+					<b style="font-size: 40px;">78</b>&nbsp;(次)
+				</div>
+				<div style="margin-top: 40px;">文章累计共78次！</div>
+			</div>
+		</div>
 		<div id="tab3-content" class="mdui-p-a-2">
 			<div style="float: left;width: 350px;">
 				
@@ -139,7 +168,7 @@
 		}
 		
 		myCalendar.updateSize('500px', '300px');
-		myCalendar.addMark('2017-6-22', 'hahahhahahah');
+		myCalendar.addMark('2017-6-22', '下班回家买菜做饭喽');
 		
 	</script>
 	
