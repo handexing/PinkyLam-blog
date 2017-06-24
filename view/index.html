@@ -84,7 +84,7 @@
 		    </button>
     		<div class="mdui-fab-dial">
       			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink"><i class="mdui-icon material-icons">&#xe864</i></button>
-      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red"><i class="mdui-icon material-icons">&#xe866</i></button>
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red" id="addArticle"><i class="mdui-icon material-icons">&#xe0e0</i></button>
       			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange"><i class="mdui-icon material-icons">&#xe191</i></button>
       			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue"><i class="mdui-icon material-icons">&#xe913</i></button>
     		</div>
@@ -94,24 +94,52 @@
   			<iframe id="m_Iframe" frameborder="0" width="100%" height="100%" marginheight="0" marginwidth="0" scrolling="no"></iframe>
   		</div>
   		
+  		<!--添加文章对话框-->
+  		<div class="mdui-dialog" id="addArticleDialog">
+    		<div class="mdui-dialog-title">添加文章</div>
+    		<div class="mdui-dialog-content">
+    			<div class="mdui-textfield">
+				  	<div class="mdui-textfield mdui-textfield-floating-label">
+					  	<label class="mdui-textfield-label">文章标题</label>
+  						<input class="mdui-textfield-input" type="text" maxlength="20"/>
+					</div>
+				</div>
+    		</div>
+    		<div class="mdui-dialog-actions">
+      			<button class="mdui-btn mdui-ripple" mdui-dialog-cancel>保存</button>
+      			<button class="mdui-btn mdui-ripple" mdui-dialog-confirm>关闭</button>
+    		</div>
+  		</div>
+  
 	</body>
 	<script type="text/javascript" src="../resource/js/jquery.min.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/mdui/js/mdui.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
-	
+	<script src="https://cdn.bootcss.com/marked/0.3.6/marked.js"></script>
+		
 	<script type="application/javascript">
 		
 		var inst = new mdui.Drawer('#drawer');
 		var fab = new mdui.Fab('#fab');
 		var menu = new mdui.Menu('#settingBtn', '#setting_menu');
 		
+		var addArticleDialog = new mdui.Dialog('#addArticleDialog');
+		
+		
 		$(function(){
+			
 			inst.close();//隐藏侧边菜单
 			$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
 			
 			$('#home_panel').bind('click',function(){
 				$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
 			});
+			
+			//添加文章
+			$('#addArticle').bind('click',function(){
+				addArticleDialog.open();
+			});
+			
 		});
 
 		document.getElementById('settingBtn').addEventListener('click', function () {
