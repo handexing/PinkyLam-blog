@@ -25,5 +25,7 @@
 
 ![日历提醒](https://github.com/handexing/PinkyLam-blog/raw/master/preview/m_calendar.png)
 
+![文章管理](https://github.com/handexing/PinkyLam-blog/raw/master/preview/articlelist.png)
+
 
 > 觉得不错的朋友可以点下star,watch,fork也算是对我的鼓励了。
