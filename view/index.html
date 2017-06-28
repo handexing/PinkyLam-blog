@@ -60,7 +60,7 @@
 				  	</li>-->
 				  	<li class="mdui-list-item mdui-ripple">
 					    <i class="mdui-list-item-icon mdui-icon material-icons">&#xeb3b;</i>
-					    <div class="mdui-list-item-content" id="home_panel">文章管理</div>
+					    <div class="mdui-list-item-content" id="article_panel">文章管理</div>
 				  	</li>
 				  	<li class="mdui-list-item mdui-ripple">
 					    <i class="mdui-list-item-icon mdui-icon material-icons">&#xeb3d;</i>
@@ -133,6 +133,10 @@
 			
 			$('#home_panel').bind('click',function(){
 				$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
+			});
+			
+			$('#article_panel').bind('click',function(){
+				$("#m_Iframe").attr("src","article.html").attr("name","article");
 			});
 			
 			//添加文章
