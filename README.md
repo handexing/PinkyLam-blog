@@ -10,6 +10,7 @@
 - 开发登录界面和首页（*2017-06-22*）
 - 修改首页界面、完善日历提醒界面开发（*2017-06-23*）
 - 修改整体界面布局，添加仪表盘（*2017-06-24*）
+- 完成文章管理界面开发和添加文章界面，集成markdown插件（*2017-06-28*）
 
 ## 项目预览
 
@@ -27,5 +28,6 @@
 
 ![文章管理](https://github.com/handexing/PinkyLam-blog/raw/master/preview/articlelist.png)
 
+![添加文章](https://github.com/handexing/PinkyLam-blog/raw/master/preview/addArticle.png)
 
 > 觉得不错的朋友可以点下star,watch,fork也算是对我的鼓励了。

@@ -13,53 +13,21 @@
 	</head>
 	<body>
 		<div class="mdui-container-fluid">
-			<div class="mdui-float-left mdui-m-b-2 mdui-m-t-1">
-				<button class="mdui-btn mdui-ripple mdui-color-blue mdui-btn-block" style="width: 200px;" id="addArticle">新增文章</button>
+			<div class="mdui-textfield">
+				<div class="mdui-textfield mdui-textfield-floating-label">
+					<label class="mdui-textfield-label">文章标题</label>
+  					<input class="mdui-textfield-input" type="text" maxlength="20"/>
+				</div>
 			</div>
-			<div class="mdui-table-fluid">
-				<table class="mdui-table mdui-table-selectable mdui-table-hoverable">
-				    <thead>
-				      	<tr>
-					        <th>标题</th>
-					        <th>发布时间</th>
-					        <th>浏览量</th>
-					        <th>发布状态</th>
-					        <th>操作</th>
-				      	</tr>
-				    </thead>
-				    <tbody>
-				      	<tr class="mdui-table-row-selected">
-					        <td>spring,quartz任务动态调用</td>
-					        <td>2017-06-28 17:25</td>
-					        <td>56</td>
-					        <td>草稿</td>
-					        <td>删除</td>
-				      	</tr>
-				      	<tr>
-					        <td>spring,quartz任务动态调用</td>
-					        <td>2017-06-28 17:25</td>
-					        <td>56</td>
-					        <td>草稿</td>
-					        <td>删除</td>
-				      	</tr>
-				      	<tr>
-				        	<td>spring,quartz任务动态调用</td>
-					        <td>2017-06-28 17:25</td>
-					        <td>56</td>
-					        <td>草稿</td>
-					        <td>删除</td>
-				      	</tr>
-				    </tbody>
-				</table>
-			</div>
+			<div id="editormd">                
+	             <textarea style="display:none;"></textarea>
+            </div>
   		</div>
-  		
 	</body>
 	
 	<script type="text/javascript" src="../resource/js/jquery.min.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/mdui/js/mdui.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
-	<script type="application/javascript" src="../resource/plugins/datatables/1.10.0/jquery.dataTables.min.js"></script>
 	 <script type="text/javascript" src="../resource/plugins/editor/editormd.js" ></script>
 	
 	<script type="application/javascript">
@@ -68,15 +36,6 @@
 		 
 		$(function(){
 		
-			$('#addArticle').bind('click',function(){
-				layer.open({
-				  type: 2,
-				  area: ['100%', '100%'],
-				  fixed: false, //不固定
-				  maxmin: true,
-				  content: 'addArticle.html'
-				});
-			});
 		
 		 	editormd.emoji = {
                 path  : "https://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/",
@@ -90,7 +49,11 @@
             };
                 
             m_Editor = editormd("editormd", {
-                width  : "90%",
+				 toolbarIcons : function() {
+            		return ["undo", "redo", "|", "bold","del","italic" ,"quote","ucwords","uppercase","lowercase","|","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","hr", "|","link"/*,"reference-link"*/,"image",
+            			"code","preformatted-text","code-block","table","datetime", "emoji"/*,"html-entities"*/,"|","goto-line","search","preview", "watch", "|", "fullscreen", "file", "faicon"]
+       			},
+				width  : "100%",
                 height : 700,
                 toc : true,
                 emoji : true,       
