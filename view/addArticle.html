@@ -7,35 +7,51 @@
 		<link rel="stylesheet" href="../resource/plugins/mdui/css/mdui.min.css" />
 		<link rel="stylesheet" href="../resource/css/index.css" />
 		<link rel="stylesheet" href="../resource/css/article.css" />
-		 <link rel="stylesheet" href="../resource/plugins/editor/css/editormd.css" />
+		<link rel="stylesheet" href="../resource/plugins/editor/css/editormd.css" />
 		<link rel="stylesheet" type="text/css" href="../resource/plugins/simple-calendar/simple-calendar.css">
-	
+		<link rel="stylesheet" type="text/css" href="../resource/plugins/layui/css/layui.css" />
+		
 	</head>
 	<body>
 		<div class="mdui-container-fluid">
-			<div class="mdui-textfield">
-				<div class="mdui-textfield mdui-textfield-floating-label">
-					<label class="mdui-textfield-label">文章标题</label>
-  					<input class="mdui-textfield-input" type="text" maxlength="20"/>
+			<div class="mdui-m-t-0">
+				
+				<div class="mdui-textfield mdui-col-xs-6">
+  					<input class="mdui-textfield-input" type="text" placeholder="文章标题"/>
+				</div>
+				
+				<div class="mdui-textfield mdui-col-xs-3">
+  					<input class="mdui-textfield-input" type="text" placeholder="文章类别"/>
+				</div>
+				
+				<div class="mdui-textfield mdui-col-xs-3">
+  					<input class="mdui-textfield-input" type="text" placeholder="文章所属标签"/>
+				</div>
+				
+				<div class="mdui-textfield mdui-col-xs-12">
+  					<input class="mdui-textfield-input" type="text" placeholder="文章描述"/>
 				</div>
 			</div>
+			
 			<div id="editormd">                
 	             <textarea style="display:none;"></textarea>
             </div>
   		</div>
+  		
+  		
 	</body>
 	
 	<script type="text/javascript" src="../resource/js/jquery.min.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/mdui/js/mdui.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
-	 <script type="text/javascript" src="../resource/plugins/editor/editormd.js" ></script>
+	<script type="text/javascript" src="../resource/plugins/editor/editormd.js" ></script>
+	<script type="application/javascript" src="../resource/plugins/layer/2.4/layer.js"></script> 
 	
 	<script type="application/javascript">
 		
 		var m_Editor;
 		 
 		$(function(){
-		
 		
 		 	editormd.emoji = {
                 path  : "https://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/",
@@ -54,7 +70,7 @@
             			"code","preformatted-text","code-block","table","datetime", "emoji"/*,"html-entities"*/,"|","goto-line","search","preview", "watch", "|", "fullscreen", "file", "faicon"]
        			},
 				width  : "100%",
-                height : 700,
+                height : 550,
                 toc : true,
                 emoji : true,       
                 taskList : true,
