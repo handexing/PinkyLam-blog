@@ -10,35 +10,50 @@
 		<link rel="stylesheet" href="../resource/plugins/editor/css/editormd.css" />
 		<link rel="stylesheet" type="text/css" href="../resource/plugins/simple-calendar/simple-calendar.css">
 		<link rel="stylesheet" type="text/css" href="../resource/plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../resource/plugins/tag-editor/jquery.tag-editor.css">
 		
+		<style>
+			.m_input {height: 35px;border: 1px solid #eee;padding-left: 5px;float: left;}
+			.tag_label{float: left;margin-top: 10px;}
+		</style>
 	</head>
 	<body>
 		<div class="mdui-container-fluid">
-			<div class="mdui-m-t-0">
-				
-				<div class="mdui-textfield mdui-col-xs-6">
-  					<input class="mdui-textfield-input" type="text" placeholder="文章标题"/>
+			<div class="mdui-m-t-1" style="height: 95px;">
+				<div class="mdui-col-xs-5">
+  					<span class="tag_label">标题：</span>
+  					<input class="m_input" type="text" placeholder="请输入文章标题..." style="width: 86%;"/>
 				</div>
 				
-				<div class="mdui-textfield mdui-col-xs-3">
-  					<input class="mdui-textfield-input" type="text" placeholder="文章类别"/>
+				<div class="mdui-col-xs-5">
+  					<span class="tag_label">tag：</span>
+  					<input class="m_input" type="text" id="tag" placeholder="文章所属标签" style="width: 91%;"/>
 				</div>
 				
-				<div class="mdui-textfield mdui-col-xs-3">
-  					<input class="mdui-textfield-input" type="text" placeholder="文章所属标签"/>
+				<div class="mdui-col-xs-2">
+  					<span class="tag_label">类别：</span>
+  					<select class="m_input" style="width: 110px;">
+  						<option>请选择类别</option>
+  						<option>JAVA</option>
+  						<option>SPRING</option>
+  						<option>SQL</option>
+  					</select>
 				</div>
 				
-				<div class="mdui-textfield mdui-col-xs-9">
-  					<input class="mdui-textfield-input" type="text" placeholder="文章描述"/>
+				<div class="mdui-col-xs-9 mdui-m-t-1">
+  					<span class="tag_label">描述：</span>
+  					<input class="m_input" type="text" placeholder="文章描述" style="width:92%;"/>
 				</div>
-				<div class="mdui-float-left mdui-m-b-2 mdui-m-t-1">
-					<button class="mdui-btn mdui-ripple mdui-color-blue mdui-btn-block" style="width: 100px;" id="addArticle">保存</button>
-				</div>
-				<div class="mdui-float-left mdui-m-b-2 mdui-m-t-1 mdui-m-l-1">
-					<button class="mdui-btn mdui-ripple mdui-color-red mdui-btn-block" style="width: 100px;" id="addArticle">预览</button>
+				
+				<div class="mdui-col-xs-3 mdui-m-t-1">
+					<div class="mdui-float-left">
+						<button class="mdui-btn mdui-ripple mdui-color-blue mdui-btn-block" style="width: 100px;" id="addArticle">保存</button>
+					</div>
+					<div class="mdui-float-left mdui-m-l-1">
+						<button class="mdui-btn mdui-ripple mdui-color-red mdui-btn-block" style="width: 100px;" id="addArticle">预览</button>
+					</div>
 				</div>
 			</div>
-			
 			<div id="editormd">                
 	             <textarea style="display:none;"></textarea>
             </div>
@@ -52,6 +67,7 @@
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/editor/editormd.js" ></script>
 	<script type="application/javascript" src="../resource/plugins/layer/2.4/layer.js"></script> 
+	<script type="text/javascript" src="../resource/plugins/tag-editor/jquery.tag-editor.js"></script>
 	
 	<script type="application/javascript">
 		
@@ -72,16 +88,22 @@
                 
             m_Editor = editormd("editormd", {
 				 toolbarIcons : function() {
-            		return ["undo", "redo", "|", "bold","del","italic" ,"quote","ucwords","uppercase","lowercase","|","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","hr", "|","link"/*,"reference-link"*/,"image",
-            			"code","preformatted-text","code-block","table","datetime", "emoji"/*,"html-entities"*/,"|","goto-line","search","preview", "watch", "|", "fullscreen", "file", "faicon"]
+            		return ["undo", "redo", "|", "bold","del","italic" ,"quote","ucwords","uppercase","lowercase",/*"|","h1","h2","h3","h4","h5","h6",*/"|","list-ul","list-ol","hr", "|","link"/*,"reference-link"*/,"image",
+            			"code",/*"preformatted-text",*/"code-block","table","datetime", "emoji"/*,"html-entities"*/,"|",/*"goto-line",*/"search","preview", "watch",/* "|", "fullscreen",*/ "file", "faicon"]
        			},
 				width  : "100%",
-                height : 550,
+                height : 556,
                 toc : true,
                 emoji : true,       
                 taskList : true,
                 path   : '../resource/plugins/editor/lib/'
             });
+            
+            
+             $('#tag').tagEditor({
+                placeholder: '请输入文章所属标签...'
+            });
+
 		});
 	</script>
 	
