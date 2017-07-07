@@ -46,4 +46,8 @@
 
 ![添加文章](https://github.com/handexing/PinkyLam-blog/raw/master/preview/addArticle.png)
 
+### 分类、标签
+
+![分类标签](https://github.com/handexing/PinkyLam-blog/raw/master/preview/catesLabel.png)
+
 > 觉得不错的朋友可以点下star,watch,fork也算是对我的鼓励了。
