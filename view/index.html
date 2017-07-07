@@ -68,7 +68,7 @@
 				  	</li>
 				  	<li class="mdui-list-item mdui-ripple">
 					    <i class="mdui-list-item-icon mdui-icon material-icons">&#xe2c7;</i>
-					    <div class="mdui-list-item-content" id="home_panel">文件管理</div>
+					    <div class="mdui-list-item-content" id="file_panel">文件管理</div>
 				  	</li><li class="mdui-list-item mdui-ripple">
 					    <i class="mdui-list-item-icon mdui-icon material-icons">&#xe8b8;</i>
 					    <div class="mdui-list-item-content" id="home_panel">系统设置</div>
@@ -120,8 +120,14 @@
 			});
 			
 			$('#cates_label_panel').bind('click',function(){
-				$("#m_Iframe").attr("src","catesLabel.html").attr("name","article");
+				$("#m_Iframe").attr("src","catesLabel.html").attr("name","catesLabel");
 			});
+			
+			$('#file_panel').bind('click',function(){
+				$("#m_Iframe").attr("src","filePage.html").attr("name","filePage");
+			});
+			
+			
 			
 			//添加文章
 			$('#addArticle').bind('click',function(){
