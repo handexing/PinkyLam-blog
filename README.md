@@ -56,4 +56,9 @@
 
 ![分类标签](https://github.com/handexing/PinkyLam-blog/raw/master/preview/catesLabel.png)
 
+### 文件管理
+
+![文件管理](https://github.com/handexing/PinkyLam-blog/raw/master/preview/filePage.png)
+
+
 > 觉得不错的朋友可以点下star,watch,fork也算是对我的鼓励了。
