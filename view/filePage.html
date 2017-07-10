@@ -22,10 +22,11 @@
                 <div class="fallback">
                 	<input name="file" type="file" multiple="multiple"/>
                 </div>
-                <div class="dz-message" style="font-size: 25px;">
-                	将文件拖至此处或点击上传.
-                </div>
-          </form>
+		        <div class="dz-message" style="font-size: 25px;">
+		                             将文件拖至此处或点击上传.
+		        </div>
+          	</form>
+          
           
 		</div>
 		
@@ -44,8 +45,7 @@
 	        url: "/admin/attach/upload",
 	        maxFilesize: 1,
 	        init: function () {
-	        	$(".dz-message").hide();
-	        	console.log("阿斯达大所")
+	        	console.log("阿斯达大所");
 	            this.on("success", function (file, msg) {
 	                console.log(file);
 	                if (msg.success !== true) {
@@ -55,11 +55,17 @@
 	                    window.location.reload();
 	                }, 200);
 	            });
+	        },
+	        sending:function(){
+	        	$(".dz-message").hide();
+	        },
+	        success:function(){
+	        	$(".dz-message").hide();
 	        }
     	});
 		
 		$(function(){
-			$(".dz-message").show();
+
 		});
 	</script>
 	
