@@ -34,8 +34,22 @@
 <script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
 
 <script type="application/javascript">
+	
 	$(function(){
 		
+//		var redis = require("redis");
+//  	client = redis.createClient(6379, "127.0.0.1");
+//
+//		client.on("error", function(err){
+//		    console.log("Error: " + err);
+//		});
+//		client.set("test", "hhhhhh");
+		
+		var host;
+		$.getJSON("config.json", function (data) {
+        	host = data.host.url;
+        });
+	
 		$('#loginBtn').bind('click',function(){
 			
 			var account = $.trim($("#account").val());
@@ -50,7 +64,16 @@
 				layer.msg('密码不能为空！', {icon: 7});
 				return;
 			}
-			window.location.href = "index.html";
+
+			$.post(host+"user/login/"+account+"/"+pwd,{},function(data){
+				if(data.success){
+					window.location.href = "index.html";
+				} else {
+					layer.msg("登陆失败，请检查用户名与密码!", {icon: 7});
+				}
+			}).fail(function(data){
+				layer.msg("系统异常，请联系系统管理员!", {icon: 7});
+			});
 		});
 		
 	});

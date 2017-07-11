@@ -18,6 +18,11 @@
 - 添加类别、标签界面，修改添加文章界面（*2017-07-07*）
 - 大致完成整体界面开发，开始开发服务端接口（*2017-07-10*）
 
+## 项目配置
+
+> view/config.json 项目配置文件
+
+
 ## 服务端项目
 
 [pinkyLam-Blog-Server](https://github.com/handexing/pinkyLam-Blog-Server)
