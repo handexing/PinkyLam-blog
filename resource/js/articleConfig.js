@@ -1,12 +1,24 @@
 /**
- * 文章管理
+ * 添加文章管理
  */
-function articleConfig(host){
+function articleConfig(data){
 	
 	var self=this;
 	var m_Editor;
+	var user;
 
 	this.init=function(){
+		
+		var redis = require("redis");
+    	client = redis.createClient(data.redis.port, data.redis.server);
+
+		client.on("error", function(err){
+		    console.log("Error: " + err);
+		});
+		
+		client.get("user", function(err, reply) {
+		    user = JSON.parse(reply);
+		});
 		
 		editormd.emoji = {
             path  : "https://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/",
@@ -38,7 +50,7 @@ function articleConfig(host){
         });
             
 		
-		$.post(host+"cateLabel/getCateLabelList/1",{},function(data){
+		$.post(data.host.url+"cateLabel/getCateLabelList/1",{},function(data){
 			if(data.success){
 				var result = data.data;
 				$.each(result, function(index, itemobj) {
@@ -86,10 +98,11 @@ function articleConfig(host){
 			article.subtitle = subTitle;
 			article.content = content;
 			article.tag = tag;
-			article.cateId = cateSelect
+			article.cateId = cateSelect;
+			article.authorId = user.id;
 			
 			$.ajax({
-				url:host+'article/saveArticle',
+				url:data.host.url+'article/saveArticle',
 	            type: "POST",
 	            dataType: "json",//跨域ajax请求,返回数据格式为json
 	            cache: false,
@@ -102,7 +115,7 @@ function articleConfig(host){
 				data:JSON.stringify(article),
 				success:function(responseData, status){
 					if(responseData.success){
-						layer.msg('添加成功！', {icon: 2});
+						layer.msg('添加成功！', {icon: 1});
 					}else{
 						layer.msg('添加失败！', {icon: 5});
 					}

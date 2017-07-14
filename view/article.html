@@ -27,23 +27,9 @@
 					        <th>操作</th>
 				      	</tr>
 				    </thead>
-				    <tbody>
-				      	<tr class="mdui-table-row-selected">
-					        <td>spring,quartz任务动态调用</td>
-					        <td>2017-06-28 17:25</td>
-					        <td>56</td>
-					        <td>草稿</td>
-					        <td>删除</td>
-				      	</tr>
+				    <tbody id="articleDatas">
 				      	<tr>
 					        <td>spring,quartz任务动态调用</td>
-					        <td>2017-06-28 17:25</td>
-					        <td>56</td>
-					        <td>草稿</td>
-					        <td>删除</td>
-				      	</tr>
-				      	<tr>
-				        	<td>spring,quartz任务动态调用</td>
 					        <td>2017-06-28 17:25</td>
 					        <td>56</td>
 					        <td>草稿</td>
@@ -60,44 +46,16 @@
 	<script type="text/javascript" src="../resource/plugins/mdui/js/mdui.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
 	<script type="application/javascript" src="../resource/plugins/datatables/1.10.0/jquery.dataTables.min.js"></script>
-	 <script type="text/javascript" src="../resource/plugins/editor/editormd.js" ></script>
+	<script type="text/javascript" src="../resource/js/articlePageConfig.js" ></script>
 	
 	<script type="application/javascript">
-		
-		var m_Editor;
 		 
 		$(function(){
-		
-			$('#addArticle').bind('click',function(){
-				layer.open({
-					title :'添加文章',
-					maxmin:false,
-				  	type: 2,
-				  	area: ['100%', '100%'],
-				  	fixed: false, //不固定
-				  	content: 'addArticle.html'
-				});
-			});
-		
-		 	editormd.emoji = {
-                path  : "https://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/",
-                ext   : ".png"
-            };
-    
-            // Twitter Emoji (Twemoji)  graphics files url path    
-            editormd.twemoji = {
-                path : "http://twemoji.maxcdn.com/72x72/",
-                ext  : ".png"
-            };
-                
-            m_Editor = editormd("editormd", {
-                width  : "90%",
-                height : 700,
-                toc : true,
-                emoji : true,       
-                taskList : true,
-                path   : '../resource/plugins/editor/lib/'
-            });
+			
+			$.getJSON("config.json", function (data) {
+	    		new articlePageConfig(data);
+	    	});
+	    	
 		});
 	</script>
 	

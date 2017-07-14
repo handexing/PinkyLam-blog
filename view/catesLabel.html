@@ -61,9 +61,11 @@
 				</div>
 			</div>
 			<div id="tab2-content" class="mdui-p-a-2">
-				<div class="mdui-chip">
-				  	<span class="mdui-chip-icon mdui-color-blue"><i class="mdui-icon material-icons">&#xe60e;</i></span>
-				  	<span class="mdui-chip-title">前端</span>
+				<div id="labelList">
+					<div class="mdui-chip">
+					  	<span class="mdui-chip-icon mdui-color-blue"><i class="mdui-icon material-icons">&#xe60e;</i></span>
+					  	<span class="mdui-chip-title">前端</span>
+					</div>
 				</div>
 			</div>
 			
@@ -79,10 +81,12 @@
 	
 	<script type="application/javascript">
 		
+		var m_cateLabel;
+		
 		$(function(){
 			
 			$.getJSON("config.json", function (data) {
-	        	new cateLabelConfig(data.host.url);
+	        	m_cateLabel = new cateLabelConfig(data);
 	        });
 	        
 		});

@@ -14,7 +14,7 @@
 		<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
 		  	<div class="mdui-toolbar mdui-color-indigo">
 			    <a href="javascript:;" class="mdui-btn mdui-btn-icon" id="toggle"><i class="mdui-icon material-icons">&#xe5d2;</i></a>
-			   	<a href="javascript:;" class="mdui-typo-headline">Handx</a>
+			   	<a href="javascript:;" class="mdui-typo-headline" id="authorName">Handx</a>
 			    <div class="mdui-toolbar-spacer"></div>
 			    <div class="mdui-textfield mdui-textfield-expandable">
 					<button class="mdui-textfield-icon mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe8b6;</i></button>
@@ -106,7 +106,27 @@
 		var fab = new mdui.Fab('#fab');
 		var menu = new mdui.Menu('#settingBtn', '#setting_menu');
 		
+		var client;
+		var user;
+		
 		$(function(){
+			
+			var redis = require("redis");
+			
+			$.getJSON("config.json", function (data) {
+		    	client = redis.createClient(data.redis.port, data.redis.server);
+		    	
+				client.on("error", function(err){
+				    console.log("Error: " + err);
+				});
+				
+				client.get("user", function(err, reply) {
+				    user = JSON.parse(reply);
+					$("#authorName").text(user.nick);
+				});
+				
+	    	});
+	
 			
 			inst.close();//隐藏侧边菜单
 			$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
