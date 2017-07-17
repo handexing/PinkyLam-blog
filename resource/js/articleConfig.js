@@ -116,6 +116,7 @@ function articleConfig(data){
 				success:function(responseData, status){
 					if(responseData.success){
 						layer.msg('添加成功！', {icon: 1});
+						window.location.href = "article.html";
 					}else{
 						layer.msg('添加失败！', {icon: 5});
 					}

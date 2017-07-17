@@ -7,17 +7,29 @@
 		<link rel="stylesheet" href="../resource/plugins/mdui/css/mdui.min.css" />
 		<link rel="stylesheet" href="../resource/css/index.css" />
 		<link rel="stylesheet" href="../resource/css/article.css" />
-		 <link rel="stylesheet" href="../resource/plugins/editor/css/editormd.css" />
+		<link rel="stylesheet" href="../resource/plugins/editor/css/editormd.css" />
 		<link rel="stylesheet" type="text/css" href="../resource/plugins/simple-calendar/simple-calendar.css">
+		<link rel="stylesheet" type="text/css" href="../resource/plugins/layui/css/layui.css">
 	
 	</head>
 	<body>
 		<div class="mdui-container-fluid">
-			<div class="mdui-float-left mdui-m-b-2 mdui-m-t-1">
-				<button class="mdui-btn mdui-ripple mdui-color-blue mdui-btn-block" style="width: 200px;" id="addArticle">新增文章</button>
+			<div class="mdui-float-left mdui-m-b-2 mdui-m-t-4" style="width: 100%;">
+				<div class="mdui-float-left">
+				    <label class="layui-form-label" style="width: 50px;padding:9px 5px;">标题：</label>
+				    <div class="layui-input-block" style="width: 400px;margin-left: 60px;">
+	      				<input type="text" id="title" placeholder="请输入标题..." autocomplete="off" class="layui-input">
+	    			</div>
+	  			</div>
+	  			
+	  			<div class="mdui-float-left mdui-m-l-2">
+				   <button class="mdui-btn mdui-ripple mdui-color-brown mdui-btn-block" style="width: 100px;" id="searchBtn">查询</button>
+	  			</div>
+				<button class="mdui-btn mdui-m-l-2 mdui-ripple mdui-color-blue mdui-btn-block mdui-float-left" style="width: 150px;" id="addArticle">新增文章</button>
 			</div>
+			
 			<div class="mdui-table-fluid">
-				<table class="mdui-table mdui-table-selectable mdui-table-hoverable">
+				<table class="mdui-table mdui-table-hoverable mdui-table-selectable" id="articleTable">
 				    <thead>
 				      	<tr>
 					        <th>标题</th>
@@ -28,32 +40,29 @@
 				      	</tr>
 				    </thead>
 				    <tbody id="articleDatas">
-				      	<tr>
-					        <td>spring,quartz任务动态调用</td>
-					        <td>2017-06-28 17:25</td>
-					        <td>56</td>
-					        <td>草稿</td>
-					        <td>删除</td>
-				      	</tr>
 				    </tbody>
 				</table>
 			</div>
+			<div id="m_page" class="mdui-float-right"></div>
   		</div>
-  		
+		
 	</body>
 	
 	<script type="text/javascript" src="../resource/js/jquery.min.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/mdui/js/mdui.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
-	<script type="application/javascript" src="../resource/plugins/datatables/1.10.0/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="../resource/plugins/layui/layui.js"></script>
+	
 	<script type="text/javascript" src="../resource/js/articlePageConfig.js" ></script>
 	
 	<script type="application/javascript">
 		 
 		$(function(){
 			
+			var m_article;
+			
 			$.getJSON("config.json", function (data) {
-	    		new articlePageConfig(data);
+	    		m_article = new articlePageConfig(data);
 	    	});
 	    	
 		});
