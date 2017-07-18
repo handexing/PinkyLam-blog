@@ -69,6 +69,7 @@ function articleConfig(data){
 			var cateSelect = $.trim($("#cateSelect").val());
 			var subTitle = $.trim($("#subTitle").val());
 			var content = m_Editor.getMarkdown();
+			var id = $("#articleId").val();
 			
 			console.log(title+":："+tag+"：："+cateSelect+"：："+subTitle+"：："+content);
 			
@@ -93,7 +94,7 @@ function articleConfig(data){
 			}
 			
 			var article={};
-			
+			article.id = id;
 			article.title = title;
 			article.subtitle = subTitle;
 			article.content = content;
@@ -116,7 +117,8 @@ function articleConfig(data){
 				success:function(responseData, status){
 					if(responseData.success){
 						layer.msg('添加成功！', {icon: 1});
-						window.location.href = "article.html";
+						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+						parent.layer.close(index); //再执行关闭
 					}else{
 						layer.msg('添加失败！', {icon: 5});
 					}
@@ -126,10 +128,53 @@ function articleConfig(data){
 			
 		});
 	
+		var id = getUrlVars()['id'];
+		
+		if(typeof(id) != "undefined"){
+			$("#articleId").val(id);
+			$.post(data.host.url+"article/getArticle",{"id":id},function(data){
+				if(data.success){
+					$("#title").val(data.data.title);
+//					$("#cateSelect").val();
+					$("#subTitle").val(data.data.subtitle);
+					m_Editor = editormd("editormd", {
+			        	markdown : data.data.content
+		        	});
+		        	
+		        	var labels = data.data.labels;
+		        	
+		        	$.each(labels, function(index, itemobj) {
+		        		var name=labels[index].name;
+						var type=labels[index].type;
+						
+						if(type == 1){
+							
+						}else{
+							$('#tag').tagEditor('addTag', name);
+						}
+		        	});
+				}else{
+					layer.msg('程序出错！', {icon: 5});
+				}
+			});
+		}else{
+			$("#articleId").val("");
+		}
+	
 	}
 	
 	self.init();
 	
 }
 
-
+//获取url的参数
+function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}

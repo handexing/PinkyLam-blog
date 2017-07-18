@@ -28,7 +28,10 @@ function articlePageConfig(data){
 				type: 2,
 				area: ['100%', '100%'],
 				fixed: false, //不固定
-				content: 'addArticle.html'
+				content: 'addArticle.html',
+				end: function(){
+					self.articleList(0,true);
+				}
 			});
 		});
 		
@@ -92,8 +95,6 @@ function articlePageConfig(data){
 				var status=result[index].status;
 				var content=result[index].content;
 				
-				
-				
 				var $tr = $("<tr>"+  
 					"<td class=\"mdui-table-cell-checkbox\"><label class=\"mdui-checkbox\"><input type=\"checkbox\"><i class=\"mdui-checkbox-icon\"></i></label></td>"+ 
 	                "<td>"+title+"</td>"+  
@@ -101,11 +102,11 @@ function articlePageConfig(data){
 	                "<td>"+hits+"</td>"+
 	                "<td>"+status+"</td>"+ 
 	                "<td>"+
-	                	"<a href=\"#\" onclick=\"preview('"+title+"','"+id+"')\" mdui-tooltip=\"{content: '预览'}\"><i class=\"mdui-icon material-icons\">&#xe8b6;</i></a>"+
-	                	"<a href=\"#\" mdui-tooltip=\"{content: '发布'}\" class=\"mdui-m-l-1\"><i class=\"mdui-icon material-icons\">&#xe569;</i></a>"+
-	                	"<a href=\"#\" mdui-tooltip=\"{content: '删除'}\" class=\"mdui-m-l-1\"><i class=\"mdui-icon material-icons\">&#xe872;</i></a>"+
-	                	"<a href=\"#\" mdui-tooltip=\"{content: '修改'}\" class=\"mdui-m-l-1\"><i class=\"mdui-icon material-icons\">&#xe150;</i></a>"+
-	                	"<a href=\"#\" mdui-tooltip=\"{content: '启用'}\" class=\"mdui-m-l-1\"><i class=\"mdui-icon material-icons\">&#xe87d;</i></a>"+
+	                	"<a href=\"#\" onclick=\"m_article.preview('"+title+"','"+id+"')\" mdui-tooltip=\"{content: '预览'}\"><i class=\"mdui-icon material-icons\">&#xe8b6;</i></a>"+
+//	                	"<a href=\"#\" mdui-tooltip=\"{content: '发布'}\" class=\"mdui-m-l-1\"><i class=\"mdui-icon material-icons\">&#xe569;</i></a>"+
+	                	"<a href=\"#\" onclick=\"m_article.delArticle('"+title+"','"+id+"')\" mdui-tooltip=\"{content: '删除'}\" class=\"mdui-m-l-1\"><i class=\"mdui-icon material-icons\">&#xe872;</i></a>"+
+	                	"<a href=\"#\" onclick=\"m_article.updateArticle("+id+")\" mdui-tooltip=\"{content: '修改'}\" class=\"mdui-m-l-1\"><i class=\"mdui-icon material-icons\">&#xe150;</i></a>"+
+//	                	"<a href=\"#\" mdui-tooltip=\"{content: '启用'}\" class=\"mdui-m-l-1\"><i class=\"mdui-icon material-icons\">&#xe87d;</i></a>"+
 //	                	"<a href=\"#\" mdui-tooltip=\"{content: '禁用'}\" class=\"mdui-m-l-1\"><i class=\"mdui-icon material-icons\">&#xe87e;</i></a>"+
 	                "</td>"
 	                +"</tr>"); 
@@ -141,22 +142,54 @@ function articlePageConfig(data){
 		});
 	}
 	
+	//预览
+	this.preview=function(title,id){
+		layer.open({
+			title :title,
+			maxmin:false,
+			type: 2,
+			area: ['100%', '100%'],
+			fixed: false, //不固定
+			content: 'preview.html?id='+id
+		});
+	}
+	
+	//删除文章
+	this.delArticle=function(title,id){
+		layer.confirm('确定删除【'+title+'】这篇文章吗？', {
+	  		btn: ['确认','取消'] 
+			}, function(){
+				$.post(data.host.url+"article/delArticle/"+id,{},function(data){
+					if(data.success){
+						layer.msg('删除成功！', {icon: 1});
+						self.articleList(0,true);
+					}else{
+						layer.msg('删除失败！', {icon: 5});
+					}
+				});
+			}, function(){
+	  			
+		});
+	}
+	
+	//修改文章
+	this.updateArticle=function(id){
+		layer.open({
+			title :'修改文章',
+			maxmin:false,
+			type: 2,
+			area: ['100%', '100%'],
+			fixed: false, //不固定
+			content: 'addArticle.html?id='+id,
+			end: function(){
+				self.articleList(0,true);
+			}
+		});
+	}
+	
 	self.init();
 	
 }
-
-//预览
-function preview (title,id){
-	layer.open({
-		title :title,
-		maxmin:false,
-		type: 2,
-		area: ['100%', '100%'],
-		fixed: false, //不固定
-		content: 'preview.html?id='+id
-	});
-}
-
 
 //获取url的参数
 function getUrlVars() {

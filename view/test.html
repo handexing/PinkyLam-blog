@@ -28,22 +28,7 @@
 				<button class="mdui-btn mdui-m-l-2 mdui-ripple mdui-color-blue mdui-btn-block mdui-float-left" style="width: 150px;" id="addArticle">新增文章</button>
 			</div>
 			
-			<div class="mdui-table-fluid">
-				<table class="mdui-table mdui-table-hoverable mdui-table-selectable" id="articleTable">
-				    <thead>
-				      	<tr>
-					        <th>标题</th>
-					        <th>发布时间</th>
-					        <th>浏览量</th>
-					        <th>发布状态</th>
-					        <th>操作</th>
-				      	</tr>
-				    </thead>
-				    <tbody id="articleDatas">
-				    </tbody>
-				</table>
-			</div>
-			<div id="m_page" class="mdui-float-right"></div>
+			
   		</div>
 		
 	</body>
@@ -53,13 +38,13 @@
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/layui/layui.js"></script>
 	
-	<script type="text/javascript" src="../resource/js/articlePageConfig.js" ></script>
+	<script type="text/javascript" src="../resource/js/test.js" ></script>
 	
 	<script type="application/javascript">
 		 
-		var m_article;
-		
 		$(function(){
+			
+			var m_article;
 			
 			$.getJSON("config.json", function (data) {
 	    		m_article = new articlePageConfig(data);
