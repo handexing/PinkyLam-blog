@@ -17,55 +17,57 @@
 	</head>
 	<body>
 		<div class="mdui-container-fluid">
-			
 	  		<form action="#" class="dropzone mdui-m-t-1" id="dropzone">
                 <div class="fallback">
                 	<input name="file" type="file" multiple="multiple"/>
                 </div>
 		        <div class="dz-message" style="font-size: 25px;">
-		                             将文件拖至此处或点击上传.
+					将文件拖至此处或点击上传.
 		        </div>
           	</form>
-          
-          
 		</div>
-		
 		
 	</body>
 	
 	<script type="text/javascript" src="../resource/js/jquery.min.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/mdui/js/mdui.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
-	<script type="text/javascript" src="../resource/plugins/dropzone/dropzone.js"></script>  
+	<script type="text/javascript" src="../resource/plugins/dropzone/dropzone.js"></script> 
+	<script type="text/javascript" src="../resource/js/fileConfig.js" ></script>
 	
 	<script type="application/javascript">
 		
-		$("#dropzone").dropzone({
-	        paramName: "file",
-	        url: "/admin/attach/upload",
-	        maxFilesize: 1,
-	        init: function () {
-	            this.on("success", function (file, msg) {
-	                console.log(file);
-	                if (msg.success !== true) {
-	                    tale.alertError('上传文件大于1M');
-	                }
-	                setTimeout(function () {
-	                    window.location.reload();
-	                }, 200);
-	            });
-	        },
-	        sending:function(){
-	        	$(".dz-message").hide();
-	        },
-	        success:function(){
-	        	$(".dz-message").hide();
-	        }
-    	});
+		var m_file;
 		
 		$(function(){
+			
+			$.getJSON("config.json", function (data) {
+	    		m_file = new fileConfig(data);
+	    	});
+	    	
+	    	/*$("#dropzone").dropzone({
+		        paramName: "file",
+		        url:result.host.url+"file/upload/"+user.id,
+		        maxFilesize: 5,
+		        init: function () {
+		            this.on("success", function (file, data) {
+//		            	alert(JSON.stringify(data));
+						if(data.success){
+			                setTimeout(function () {
+			                    window.location.reload();
+			                }, 200);
+						}else{
+							layer.msg('上传大小不能超过5MB！', {icon: 7});
+						}
+		            });
+		        },
+		        sending:function(){
+		        	$(".dz-message").hide();
+		        }
+    		});*/
 
 		});
+		
 	</script>
 	
 </html>
