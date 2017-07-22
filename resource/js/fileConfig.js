@@ -4,40 +4,73 @@
 function fileConfig(data){
 	
 	var self=this;
-	var m_Editor;
 	var userId;
 	
 	this.init=function(){
 		
 		//获取父窗口用户标识ID
-//		userId = window.parent.document.getElementById('userId').value;
+		userId = window.parent.document.getElementById('userId').value;
 		
-//		var redis = require("redis");
-//  	client = redis.createClient(data.redis.port, data.redis.server);
+		var redis = require("redis");
+    	client = redis.createClient(data.redis.port, data.redis.server);
 
-		/*uploadUrl = data.host.url+"file/upload/"+1;
-		alert(uploadUrl);
-		$("#dropzone").dropzone({
-		    paramName: "file",
-		    url:"http://127.0.0.1:8888/file/upload/"+userId,,
-		    maxFilesize: 5,
-		    init: function () {
-		    	this.on("success", function (file, data) {
-//		            alert(JSON.stringify(data));
-					if(data.success){
-			            setTimeout(function () {
-			                window.location.reload();
-			            }, 200);
-					}else{
-						layer.msg('上传大小不能超过5MB！', {icon: 7});
-					}
-		        });
-		    },
-		    sending:function(){
-		        $(".dz-message").hide();
-		    }
-    	});*/
-    		
+    	self.attachList(0,true);
+	}
+	
+		//文章列表
+	this.attachList=function(pageNum,flag){
+		
+		$.post(data.host.url+"file/attachList",{"userId":userId,"page":pageNum},function(data){
+			
+			var result = data.data;
+			var htmlContent="";
+			
+//			$("#attachList").html("");
+
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var name=result[index].name;
+				var type=result[index].type;
+				var url=result[index].url;
+				
+				htmlContent +="<div class=\"mdui-col mdui-m-t-2 mdui-hoverable\"  style=\"border-radius:5px;\">";
+				if(type == "image"){
+					htmlContent +="<img src='"+url+"' height=\"100\" style=\"width: 100%;\"/>";
+				}else{
+					htmlContent +="<img src=\"../resource/img/attach.png\" height=\"100\" style=\"width: 100%;\"/>";
+				}
+				htmlContent +="<div class=\"mdui-row mdui-m-t-1 mdui-p-b-1\">";
+				htmlContent +="<span class=\"mdui-col-xs-6 mdui-text-center mdui-color-red\" style=\"height: 20px;width: 40%;line-height: 20px;border-radius:25px;margin-left: 20px;\">链接</span>";
+				htmlContent +="<span class=\"mdui-col-xs-6 mdui-text-center mdui-color-blue\" style=\"height: 20px;width: 40%;line-height: 20px;border-radius:25px;\">删除</span>";
+				htmlContent +="</div></div>";
+				
+			});
+			
+			$("#attachList").html(htmlContent);
+			
+			if(flag){
+				self.pageable(data.totalPageNumber);
+			}
+			 
+		});
+		
+	}
+	
+		//分页
+	this.pageable=function(totalPageNumber){
+		layui.use(['laypage', 'layer'], function(){
+  			var laypage = layui.laypage;
+  			layer = layui.layer;
+  			
+		  	laypage({
+		    	cont: 'm_page'
+		    	,pages: totalPageNumber //得到总页数
+		    	,jump: function(obj){
+		    		self.attachList(obj.curr-1,false);
+		    	}
+		  	});
+  
+		});
 	}
 	
 	self.init();

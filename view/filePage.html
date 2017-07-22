@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="../resource/plugins/editor/css/editormd.css" />
 		<link rel="stylesheet" href="../resource/plugins/simple-calendar/simple-calendar.css">
 		<link rel="stylesheet" href="../resource/plugins/dropzone/css/dropzone.css"  />  
+		<link rel="stylesheet" type="text/css" href="../resource/plugins/layui/css/layui.css">
 
 		<style>
 			.dz-preview{float: left;}
@@ -25,6 +26,25 @@
 					将文件拖至此处或点击上传.
 		        </div>
           	</form>
+          	<div class="mdui-container-fluid">
+          		<div class="mdui-row-xs-6" id="attachList">
+				  	<div class="mdui-col mdui-m-t-2 mdui-hoverable" style="border-radius:5px;">
+				  		<img src="../resource/img/head.gif" height="100" style="width: 100%;"/>
+				  		<div class="mdui-row mdui-m-t-1">
+				  			<span class="mdui-col-xs-6 mdui-text-center mdui-color-red" style="height: 20px;width: 40%;line-height: 20px;border-radius:25px;margin-left: 20px;">链接</span>
+				  			<span class="mdui-col-xs-6 mdui-text-center mdui-color-blue" style="height: 20px;width: 40%;line-height: 20px;border-radius:25px;">删除</span>
+				  		</div>
+				  	</div>
+				  	<div class="mdui-col mdui-m-t-2 mdui-p-b-1 mdui-hoverable">
+				  		<img src="../resource/img/head.gif" height="100" style="width: 100%;"/>
+				  		<div class="mdui-row">
+				  			<span class="mdui-col-xs-6 mdui-text-center mdui-color-red" style="height: 20px;width: 40%;line-height: 20px;border-radius:25px;margin-left: 20px;">链接</span>
+				  			<span class="mdui-col-xs-6 mdui-text-center mdui-color-blue" style="height: 20px;width: 40%;line-height: 20px;border-radius:25px;">删除</span>
+				  		</div>
+				  	</div>
+				</div>
+				<div id="m_page" class="mdui-float-right"></div>
+          	</div>
 		</div>
 		
 	</body>
@@ -32,7 +52,9 @@
 	<script type="text/javascript" src="../resource/js/jquery.min.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/mdui/js/mdui.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
+	<script type="text/javascript" src="../resource/plugins/layui/layui.js"></script>
 	<script type="text/javascript" src="../resource/plugins/dropzone/dropzone.js"></script> 
+	
 	<script type="text/javascript" src="../resource/js/fileConfig.js" ></script>
 	
 	<script type="application/javascript">
@@ -44,9 +66,9 @@
 			//获取父窗口用户标识ID
 			userId = window.parent.document.getElementById('userId').value;
 			
-//			$.getJSON("config.json", function (data) {
-//	    		m_file = new fileConfig(data);
-//	    	});
+			$.getJSON("config.json", function (data) {
+	    		m_file = new fileConfig(data);
+	    	});
 	    	
 	    	$("#dropzone").dropzone({
 		        paramName: "file",
@@ -68,7 +90,7 @@
 		        	$(".dz-message").hide();
 		        }
     		});
-
+    		
 		});
 		
 	</script>
