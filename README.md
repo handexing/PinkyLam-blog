@@ -24,6 +24,7 @@
 - 修改文章管理，添加文章分页显示，文章预览（*2017-07-17*）
 - 修改文章管理，添加修改文章、删除文章，修改添加文章关闭对话框回调bug（*2017-07-18*）
 - 完成文章管理的开发与测试。（*2017-07-18*）
+- 完善文件管理，添加上传文件并保存到数据库（*2017-07-19*）
 
 ## 项目配置
 
@@ -63,6 +64,10 @@
 #### 添加文章
 
 ![添加文章](https://github.com/handexing/PinkyLam-blog/raw/master/preview/addArticle.png)
+
+#### 文章预览
+
+![文章预览](https://github.com/handexing/PinkyLam-blog/raw/master/preview/previewArticle.png)
 
 ### 分类、标签
 

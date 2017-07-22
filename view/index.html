@@ -15,6 +15,7 @@
 		  	<div class="mdui-toolbar mdui-color-indigo">
 			    <a href="javascript:;" class="mdui-btn mdui-btn-icon" id="toggle"><i class="mdui-icon material-icons">&#xe5d2;</i></a>
 			   	<a href="javascript:;" class="mdui-typo-headline" id="authorName">Handx</a>
+			   	<input type="hidden" id="userId" />
 			    <div class="mdui-toolbar-spacer"></div>
 			    <div class="mdui-textfield mdui-textfield-expandable">
 					<button class="mdui-textfield-icon mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe8b6;</i></button>
@@ -46,18 +47,6 @@
 					    <i class="mdui-list-item-icon mdui-icon material-icons">&#xe88a;</i>
 					    <div class="mdui-list-item-content" id="home_panel">首页面板</div>
 				  	</li>
-				  	<!--<li class="mdui-collapse-item mdui-collapse-item-open">
-					    <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-					      <i class="mdui-list-item-icon mdui-icon material-icons">&#xe7fb;</i>
-					      <div class="mdui-list-item-content">个人笔记</div>
-					      <i class="mdui-collapse-item-arrow mdui-icon material-icons">&#xe313;</i>
-					    </div>
-					    <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
-					      <li class="mdui-list-item mdui-ripple">JAVA</li>
-					      <li class="mdui-list-item mdui-ripple">spring</li>
-					      <li class="mdui-list-item mdui-ripple">数据库</li>
-					    </ul>
-				  	</li>-->
 				  	<li class="mdui-list-item mdui-ripple">
 					    <i class="mdui-list-item-icon mdui-icon material-icons">&#xeb3b;</i>
 					    <div class="mdui-list-item-content" id="article_panel">文章管理</div>
@@ -123,6 +112,7 @@
 				client.get("user", function(err, reply) {
 				    user = JSON.parse(reply);
 					$("#authorName").text(user.nick);
+					$("#userId").val(user.id);
 				});
 				
 	    	});

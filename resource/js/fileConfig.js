@@ -5,20 +5,21 @@ function fileConfig(data){
 	
 	var self=this;
 	var m_Editor;
-	var user;
-
+	var userId;
+	
 	this.init=function(){
 		
-		var redis = require("redis");
-    	client = redis.createClient(data.redis.port, data.redis.server);
+		//获取父窗口用户标识ID
+//		userId = window.parent.document.getElementById('userId').value;
 		
-		client.get("user", function(err, reply) {
-		    user = JSON.parse(reply);
-		});
-		
+//		var redis = require("redis");
+//  	client = redis.createClient(data.redis.port, data.redis.server);
+
+		/*uploadUrl = data.host.url+"file/upload/"+1;
+		alert(uploadUrl);
 		$("#dropzone").dropzone({
 		    paramName: "file",
-		    url:data.host.url+"file/upload/"+user.id,
+		    url:"http://127.0.0.1:8888/file/upload/"+userId,,
 		    maxFilesize: 5,
 		    init: function () {
 		    	this.on("success", function (file, data) {
@@ -35,7 +36,7 @@ function fileConfig(data){
 		    sending:function(){
 		        $(".dz-message").hide();
 		    }
-    	});
+    	});*/
     		
 	}
 	
