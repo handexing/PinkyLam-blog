@@ -39,7 +39,7 @@ function fileConfig(data){
 				if(type == "image"){
 					htmlContent +="<img src='"+imgPath+"' height=\"125\" style=\"width: 100%;\"/>";
 				}else{
-					htmlContent +="<img src=\"../resource/img/attach.png\" height=\"100\" style=\"width: 100%;\"/>";
+					htmlContent +="<img src=\"../resource/img/attach.png\" height=\"125\" style=\"width: 100%;\"/>";
 				}
 				htmlContent +="<div class=\"mdui-row mdui-m-t-1 mdui-p-b-1\">";
 				htmlContent +="<span class=\"mdui-col-xs-6 mdui-text-center mdui-color-red\" onclick='m_file.copyLink("+imgPath+")' style=\"height: 20px;width: 40%;line-height: 20px;border-radius:25px;margin-left: 20px;\">链接</span>";
