@@ -42,8 +42,8 @@ function fileConfig(data){
 					htmlContent +="<img src=\"../resource/img/attach.png\" height=\"125\" style=\"width: 100%;\"/>";
 				}
 				htmlContent +="<div class=\"mdui-row mdui-m-t-1 mdui-p-b-1\">";
-				htmlContent +="<span class=\"mdui-col-xs-6 mdui-text-center mdui-color-red\" onclick='m_file.copyLink("+imgPath+")' style=\"height: 20px;width: 40%;line-height: 20px;border-radius:25px;margin-left: 20px;\">链接</span>";
-				htmlContent +="<span class=\"mdui-col-xs-6 mdui-text-center mdui-color-blue\" style=\"height: 20px;width: 40%;line-height: 20px;border-radius:25px;\">删除</span>";
+				htmlContent +="<span class=\"mdui-col-xs-6 mdui-text-center mdui-color-red copyBtn\" onclick=\"m_file.copyLink('"+imgPath+"')\" style=\"height: 20px;width: 40%;line-height: 20px;border-radius:25px;margin-left: 20px;cursor: pointer;\">链接</span>";
+				htmlContent +="<span class=\"mdui-col-xs-6 mdui-text-center mdui-color-blue\" style=\"height: 20px;width: 40%;line-height: 20px;border-radius:25px;cursor: pointer;\">删除</span>";
 				htmlContent +="</div></div>";
 				
 			});
@@ -77,7 +77,20 @@ function fileConfig(data){
 	
 	//复制链接
 	this.copyLink=function(url){
-		alert(url);
+
+		var clipboard = new Clipboard('span.copyBtn', {
+	        text: function (trigger) {
+	            return url;
+	        }
+	    });
+	    
+	    clipboard.on('success', function (e) {
+	    	mdui.snackbar({
+		  		message: '已复制到剪贴板！'
+			});
+	        e.clearSelection();
+	    });
+    
 	}
 	
 	self.init();
