@@ -43,7 +43,7 @@ function fileConfig(data){
 				}
 				htmlContent +="<div class=\"mdui-row mdui-m-t-1 mdui-p-b-1\">";
 				htmlContent +="<span class=\"mdui-col-xs-6 mdui-text-center mdui-color-red copyBtn\" onclick=\"m_file.copyLink('"+imgPath+"')\" style=\"height: 20px;width: 40%;line-height: 20px;border-radius:25px;margin-left: 20px;cursor: pointer;\">链接</span>";
-				htmlContent +="<span class=\"mdui-col-xs-6 mdui-text-center mdui-color-blue\" style=\"height: 20px;width: 40%;line-height: 20px;border-radius:25px;cursor: pointer;\">删除</span>";
+				htmlContent +="<span class=\"mdui-col-xs-6 mdui-text-center mdui-color-blue\" onclick=\"m_file.deleteFile('"+id+"')\" style=\"height: 20px;width: 40%;line-height: 20px;border-radius:25px;cursor: pointer;\">删除</span>";
 				htmlContent +="</div></div>";
 				
 			});
@@ -91,6 +91,24 @@ function fileConfig(data){
 	        e.clearSelection();
 	    });
     
+	}
+	
+	//删除文件
+	this.deleteFile=function(id){
+		layer.confirm('确定删除吗？', {
+	  		btn: ['确认','取消'] 
+			}, function(){
+				$.post(data.host.url+"file/deleteFile/"+id,{},function(data){
+					if(data.success){
+						layer.msg('删除成功！', {icon: 1});
+						self.attachList(0,true);
+					}else{
+						layer.msg('删除失败！', {icon: 5});
+					}
+				});
+			}, function(){
+	  			
+		});
 	}
 	
 	self.init();
