@@ -45,30 +45,30 @@
 			<div class="statistics_panel mdui-col mdui-color-pink mdui-shadow-5 mdui-hoverable mdui-img-rounded">
 				<i class="mdui-icon material-icons" style="font-size: 40px;">&#xe0e0;</i>
 				<div class="mdui-text-center">
-					<b style="font-size: 40px;">36</b>&nbsp;(篇)
+					<b style="font-size: 40px;" id="articleCnt">0</b>&nbsp;(篇)
 				</div>
-				<div style="margin-top: 40px;">已经写了36篇文章了，继续努力！</div>
+				<div style="margin-top: 40px;" id="articleDesc">已经写了0篇文章了，继续努力！</div>
 			</div>
 			<div class="statistics_panel mdui-col mdui-color-red mdui-shadow-5 mdui-hoverable mdui-img-rounded">
 				<i class="mdui-icon material-icons" style="font-size: 40px;">&#xe2bc;</i>
 				<div class="mdui-text-center">
-					<b style="font-size: 40px;">48</b>&nbsp;(个)
+					<b style="font-size: 40px;" id="attachCnt">0</b>&nbsp;(个)
 				</div>
-				<div style="margin-top: 40px;">已经上传了48个附件！</div>
+				<div style="margin-top: 40px;" id="attachDesc">已经上传了0个附件！</div>
 			</div>
 			<div class="statistics_panel mdui-col mdui-color-orange mdui-shadow-5 mdui-hoverable mdui-img-rounded">
 				<i class="mdui-icon material-icons" style="font-size: 40px;color: white;">&#xe192;</i>
 				<div class="mdui-text-center">
-					<b style="font-size: 40px;color: white;">56</b>&nbsp;<span style="color: white;">(分钟)</span>
+					<b style="font-size: 40px;color: white;" id="writingTime">0</b>&nbsp;<span style="color: white;">(分钟)</span>
 				</div>
-				<div style="margin-top: 40px;color: white;">写作时间大概已经花费56分钟！</div>
+				<div style="margin-top: 40px;color: white;" id="writingTimeDesc">写作时间大概已经花费0分钟！</div>
 			</div>
 			<div class="statistics_panel mdui-col mdui-color-blue mdui-shadow-5 mdui-hoverable mdui-img-rounded">
 				<i class="mdui-icon material-icons" style="font-size: 40px;">&#xe80d;</i>
 				<div class="mdui-text-center">
-					<b style="font-size: 40px;">78</b>&nbsp;(次)
+					<b style="font-size: 40px;" id="commentCnt">0</b>&nbsp;(次)
 				</div>
-				<div style="margin-top: 40px;">文章累计共78次！</div>
+				<div style="margin-top: 40px;" id="commentDesc">文章累计评论共0次！</div>
 			</div>
 		</div>
 		<div id="tab3-content" class="mdui-p-a-2">
@@ -135,7 +135,32 @@
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
 	<script type="application/javascript" src="../resource/plugins/simple-calendar/simple-calendar.js"></script>
 	
+	<script type="text/javascript" src="../resource/js/indexConfig.js" ></script>
+	
 	<script type="application/javascript">
+		
+		var client;
+		var user;
+		
+		$(function(){
+			
+			var redis = require("redis");
+			
+			$.getJSON("config.json", function (data) {
+		    	client = redis.createClient(data.redis.port, data.redis.server);
+		    	
+				client.on("error", function(err){
+				    console.log("Error: " + err);
+				});
+				
+				client.get("user", function(err, reply) {
+				    user = JSON.parse(reply);
+					new indexConfig(data,user);
+				});
+				
+	    	});
+	    	
+	    });
 		
 		var myCalendar = new SimpleCalendar('#m_calendar');
 		var options = {

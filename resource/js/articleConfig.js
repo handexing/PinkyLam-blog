@@ -6,6 +6,7 @@ function articleConfig(data){
 	var self=this;
 	var m_Editor;
 	var user;
+	var writingTime = 1;//写作时间
 
 	this.init=function(){
 		
@@ -101,6 +102,7 @@ function articleConfig(data){
 			article.tag = tag;
 			article.cateId = cateSelect;
 			article.authorId = user.id;
+			article.writingTime = writingTime;
 			
 			$.ajax({
 				url:data.host.url+'article/saveArticle',
@@ -160,6 +162,10 @@ function articleConfig(data){
 		}else{
 			$("#articleId").val("");
 		}
+	
+		setInterval(function faddTime(){
+			writingTime ++;
+		},1000);
 	
 	}
 	

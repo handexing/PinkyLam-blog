@@ -85,25 +85,3 @@ function cateLabelConfig(data){
 	self.init();
 	
 }
-
-
-
-/*function delCateLabel(id){
-	layer.confirm('确认删除吗？', {
-  		btn: ['确认','取消'] 
-		}, function(){
-			$.post(data.host.url+"cateLabel/delCateLabel/"+id,{},function(data){
-				if(data.data==-1){
-		  			layer.msg('删除失败，有其他文章引用！', {icon: 5});
-				}else if(data.data==1){
-					layer.msg('删除成功！', {icon: 1});
-					window.location.reload();
-				}else{
-					layer.msg('删除失败！', {icon: 5});
-				}
-			});
-		}, function(){
-  			
-	});
-}
-*/
