@@ -11,9 +11,6 @@ function fileConfig(data){
 		//获取父窗口用户标识ID
 		userId = window.parent.document.getElementById('userId').value;
 		
-		var redis = require("redis");
-    	client = redis.createClient(data.redis.port, data.redis.server);
-
     	self.attachList(0,true);
 	}
 	
@@ -22,7 +19,7 @@ function fileConfig(data){
 		
 		var host = data.host.url;
 		
-		$.post(data.host.url+"file/attachList",{"userId":userId,"page":pageNum},function(data){
+		$.post(host+"file/attachList",{"userId":userId,"page":pageNum},function(data){
 			
 			var result = data.data;
 			var htmlContent="";

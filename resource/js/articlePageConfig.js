@@ -5,22 +5,16 @@ function articlePageConfig(data){
 	
 	var self=this;
 	var m_Editor;
-	var user;
 	var articleTable;
+	var userId;
 
 	this.init=function(){
-		var redis = require("redis");
-    	client = redis.createClient(data.redis.port, data.redis.server);
+		
+		//获取父窗口用户标识ID
+		userId = window.parent.document.getElementById('userId').value;
 
-		client.on("error", function(err){
-		    console.log("Error: " + err);
-		});
-		
-		client.get("user", function(err, reply) {
-		    user = JSON.parse(reply);
-		    self.articleList(0,true);
-		});
-		
+		self.articleList(0,true);
+		    
 		$('#addArticle').bind('click',function(){
 			layer.open({
 				title :'添加文章',
@@ -28,7 +22,7 @@ function articlePageConfig(data){
 				type: 2,
 				area: ['100%', '100%'],
 				fixed: false, //不固定
-				content: 'addArticle.html',
+				content: 'addArticle.html?userId='+userId,
 				end: function(){
 					self.articleList(0,true);
 				}
@@ -38,40 +32,6 @@ function articlePageConfig(data){
 		$('#searchBtn').bind('click',function(){
 			self.articleList(0,true);
 		});
-		
-		var id = getUrlVars()['id'];
-		
-		if(id!=null){
-			
-			editormd.emoji = {
-	            path  : "https://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/",
-	            ext   : ".png"
-        	};
-    
-        	editormd.twemoji = {
-	            path : "http://twemoji.maxcdn.com/72x72/",
-	            ext  : ".png"
-        	};
-        
-			$.post(data.host.url+"article/getArticle",{"id":id},function(data){
-//				alert(JSON.stringify(data.data.content));
-				m_Editor = editormd("editormd", {
-					toolbarIcons : function() {
-            			return ["preview"]
-       				},
-					width  : "100%",
-			        height : 650,
-			        markdown : data.data.content,
-			        path   : '../resource/plugins/editor/lib/',
-			        emoji : true,      
-			        onload : function() {
-						m_Editor.previewing();
-						$("#editormd .editormd-preview-close-btn").attr("style","display: none;");
-					}
-		        });
-			});
-		}
-		
 	
 	}
 	
@@ -80,7 +40,7 @@ function articlePageConfig(data){
 		
 		var title = $.trim($("#title").val());
 		
-		$.post(data.host.url+"article/articleList",{"id":user.id,"title":title,"page":pageNum},function(data){
+		$.post(data.host.url+"article/articleList",{"id":userId,"title":title,"page":pageNum},function(data){
 			
 			var result = data.data;
 			var htmlContent="";
@@ -135,7 +95,6 @@ function articlePageConfig(data){
 		    	,pages: totalPageNumber //得到总页数
 		    	,jump: function(obj){
 		    		self.articleList(obj.curr-1,false);
-//		    		alert(JSON.stringify(obj));
 		    	}
 		  	});
   
@@ -150,7 +109,7 @@ function articlePageConfig(data){
 			type: 2,
 			area: ['100%', '100%'],
 			fixed: false, //不固定
-			content: 'preview.html?id='+id
+			content: 'preview.html?articleId='+id
 		});
 	}
 	
@@ -180,7 +139,7 @@ function articlePageConfig(data){
 			type: 2,
 			area: ['100%', '100%'],
 			fixed: false, //不固定
-			content: 'addArticle.html?id='+id,
+			content: 'addArticle.html?articleId='+id,
 			end: function(){
 				self.articleList(0,true);
 			}
@@ -189,16 +148,4 @@ function articlePageConfig(data){
 	
 	self.init();
 	
-}
-
-//获取url的参数
-function getUrlVars() {
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for (var i = 0; i < hashes.length; i++) {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
-    }
-    return vars;
 }

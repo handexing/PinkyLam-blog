@@ -139,27 +139,10 @@
 	
 	<script type="application/javascript">
 		
-		var client;
-		var user;
-		
 		$(function(){
-			
-			var redis = require("redis");
-			
 			$.getJSON("config.json", function (data) {
-		    	client = redis.createClient(data.redis.port, data.redis.server);
-		    	
-				client.on("error", function(err){
-				    console.log("Error: " + err);
-				});
-				
-				client.get("user", function(err, reply) {
-				    user = JSON.parse(reply);
-					new indexConfig(data,user);
-				});
-				
+				new indexConfig(data);
 	    	});
-	    	
 	    });
 		
 		var myCalendar = new SimpleCalendar('#m_calendar');

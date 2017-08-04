@@ -27,30 +27,15 @@
 	<script type="text/javascript" src="../resource/plugins/editor/editormd.js" ></script>
 	<script type="application/javascript" src="../resource/plugins/layer/2.4/layer.js"></script> 
 	<script type="text/javascript" src="../resource/plugins/tag-editor/jquery.tag-editor.js"></script>
-	<script type="text/javascript" src="../resource/js/articlePageConfig.js" ></script>
+	<script type="text/javascript" src="../resource/js/utils.js" ></script>
+	<script type="text/javascript" src="../resource/js/previewPageConfig.js" ></script>
 	
 	<script type="application/javascript">
 		 
 		$(function(){
 			
-//			m_Editor = editormd("editormd", {
-//					toolbarIcons : function() {
-//          			return ["preview"]
-//     				},
-//					width  : "100%",
-//			        height : 650,
-////			        markdown : data.data.content,
-//			        path   : '../resource/plugins/editor/lib/',
-//			        emoji : true,      
-//			        onload : function() {
-//						m_Editor.previewing();
-//
-//					}
-//		        });
-		        
-			
 			$.getJSON("config.json", function (data) {
-	    		new articlePageConfig(data);
+	    		new previewPageConfig(data);
 	    	});
 			
 		});

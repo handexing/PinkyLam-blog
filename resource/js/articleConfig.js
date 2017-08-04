@@ -5,28 +5,18 @@ function articleConfig(data){
 	
 	var self=this;
 	var m_Editor;
-	var user;
 	var writingTime = 1;//写作时间
+	var userId;
 
 	this.init=function(){
 		
-		var redis = require("redis");
-    	client = redis.createClient(data.redis.port, data.redis.server);
-
-		client.on("error", function(err){
-		    console.log("Error: " + err);
-		});
-		
-		client.get("user", function(err, reply) {
-		    user = JSON.parse(reply);
-		});
+		userId = getUrlVars()['userId'];
 		
 		editormd.emoji = {
             path  : "https://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/",
             ext   : ".png"
         };
     
-        // Twitter Emoji (Twemoji)  graphics files url path    
         editormd.twemoji = {
             path : "http://twemoji.maxcdn.com/72x72/",
             ext  : ".png"
@@ -101,7 +91,7 @@ function articleConfig(data){
 			article.content = content;
 			article.tag = tag;
 			article.cateId = cateSelect;
-			article.authorId = user.id;
+			article.authorId = userId;
 			article.writingTime = writingTime;
 			
 			$.ajax({
@@ -130,11 +120,11 @@ function articleConfig(data){
 			
 		});
 	
-		var id = getUrlVars()['id'];
+		var articleId= getUrlVars()['articleId'];
 		
-		if(typeof(id) != "undefined"){
-			$("#articleId").val(id);
-			$.post(data.host.url+"article/getArticle",{"id":id},function(data){
+		if(typeof(articleId) != "undefined"){
+			$("#articleId").val(articleId);
+			$.post(data.host.url+"article/getArticle",{"id":articleId},function(data){
 				if(data.success){
 					$("#title").val(data.data.title);
 //					$("#cateSelect").val();
@@ -171,16 +161,4 @@ function articleConfig(data){
 	
 	self.init();
 	
-}
-
-//获取url的参数
-function getUrlVars() {
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for (var i = 0; i < hashes.length; i++) {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
-    }
-    return vars;
 }

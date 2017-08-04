@@ -8,7 +8,10 @@ function indexConfig(data,user){
 
 	this.init=function(){
 		
-		$.post(data.host.url+"index/getMySelfInfo/"+user.id,{},function(data){
+		//获取父窗口用户标识ID
+		userId = window.parent.document.getElementById('userId').value;
+		
+		$.post(data.host.url+"index/getMySelfInfo/"+userId,{},function(data){
 			if(data.success){
 				var result = data.data;
 //				alert(JSON.stringify(result));

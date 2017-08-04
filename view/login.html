@@ -37,12 +37,12 @@
 	
 	$(function(){
 		
-		var redis = require("redis");
-    	client = redis.createClient(6379, "127.0.0.1");
-
-		client.on("error", function(err){
-		    console.log("Error: " + err);
-		});
+//		var redis = require("redis");
+//  	client = redis.createClient(6379, "127.0.0.1");
+//
+//		client.on("error", function(err){
+//		    console.log("Error: " + err);
+//		});
 		
 		var host;
 		$.getJSON("config.json", function (data) {
@@ -66,8 +66,8 @@
 
 			$.post(host+"user/login/"+account+"/"+pwd,{},function(data){
 				if(data.success){
-					client.set("user", JSON.stringify(data.data));
-					window.location.href = "index.html";
+					//client.set("user", JSON.stringify(data.data));
+					window.location.href = "index.html?userId="+data.data.id+"&userName="+data.data.nick;
 				} else {
 					layer.msg("登陆失败，请检查用户名与密码!", {icon: 7});
 				}

@@ -95,28 +95,10 @@
 		var fab = new mdui.Fab('#fab');
 		var menu = new mdui.Menu('#settingBtn', '#setting_menu');
 		
-		var client;
-		var user;
-		
 		$(function(){
 			
-			var redis = require("redis");
-			
-			$.getJSON("config.json", function (data) {
-		    	client = redis.createClient(data.redis.port, data.redis.server);
-		    	
-				client.on("error", function(err){
-				    console.log("Error: " + err);
-				});
-				
-				client.get("user", function(err, reply) {
-				    user = JSON.parse(reply);
-					$("#authorName").text(user.nick);
-					$("#userId").val(user.id);
-				});
-				
-	    	});
-	
+			$("#authorName").text(getUrlVars()['userName']);
+			$("#userId").val(getUrlVars()['userId']);
 			
 			inst.close();//隐藏侧边菜单
 			$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
@@ -136,7 +118,6 @@
 			$('#file_panel').bind('click',function(){
 				$("#m_Iframe").attr("src","filePage.html").attr("name","filePage");
 			});
-			
 			
 			
 			//添加文章
@@ -161,6 +142,18 @@
 		document.getElementById('toggle').addEventListener('click', function () {
 		  	inst.toggle();
 		});
+		
+		//获取url的参数
+		function getUrlVars() {
+		    var vars = [], hash;
+		    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		    for (var i = 0; i < hashes.length; i++) {
+		        hash = hashes[i].split('=');
+		        vars.push(hash[0]);
+		        vars[hash[0]] = hash[1];
+		    }
+    	return vars;
+		}
 		
 
 	</script>
