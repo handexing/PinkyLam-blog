@@ -25,6 +25,40 @@ function indexConfig(data,user){
 				$("commentDesc").text("文章累计评论共"+result.commentCnt+"次！");
 			} 
 		});
+		
+		$.post(data.host.url+"article/getLatelyArticleList/"+userId,{},function(data){
+			if(data.success){
+				var result = data.data;
+				if(result.length!=0){
+//					alert(JSON.stringify(result));
+					var html = "";
+					$.each(result, function(index, itemobj) {
+						var id = result[index].id;
+						var title = result[index].title;
+						var subtitle = result[index].subtitle;
+						
+						html += "<div class=\"mdui-card mdui-col-xs-3\">";
+							html += "<div class=\"mdui-card-media\">";
+							    html += "<img src=\"../resource/img/head.gif\"/>";
+							    html += "<div class=\"mdui-card-menu\">";
+							      	html += "<button class=\"mdui-btn mdui-btn-icon mdui-text-color-white\"><i class=\"mdui-icon material-icons\">&#xe80d;</i></button>";
+							    html += "</div>";
+							  	html += "<div class=\"mdui-card-media-covered\">";
+							      	html += "<div class=\"mdui-card-primary\">";
+							        	html += "<div class=\"mdui-card-primary-title\" style=\"font-size:18px;\">"+title+"</div>";
+							      	html += "</div>";
+							    html += "</div>";
+							html += "</div>";
+							html += "<div class=\"mdui-card-content\">"+subtitle+"</div>";
+						html += "</div>";
+										
+					});
+					$("#tab1-content").html(html);
+				}else{
+					$("#tab1-content").html("<p style=\"font-weight: 400;font-size: 25px;margin-left: 40%;margin-top: 200px;\">近期还没有写一篇文章...</p>");
+				}
+			} 
+		});
 
 	}
 	

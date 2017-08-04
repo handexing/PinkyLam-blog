@@ -74,7 +74,7 @@
     		<div class="mdui-fab-dial">
       			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink"><i class="mdui-icon material-icons">&#xe864</i></button>
       			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red" id="addArticle"><i class="mdui-icon material-icons">&#xe0e0</i></button>
-      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange"><i class="mdui-icon material-icons">&#xe191</i></button>
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange" id="addRemind"><i class="mdui-icon material-icons">&#xe191</i></button>
       			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue"><i class="mdui-icon material-icons">&#xe913</i></button>
     		</div>
   		</div>
@@ -83,10 +83,27 @@
   			<iframe id="m_Iframe" frameborder="0" width="100%" height="100%" marginheight="0" marginwidth="0" scrolling="no"></iframe>
   		</div>
   		
+  		<!--添加提醒-->
+  		<div class="mdui-dialog" id="remind_dialog">
+		    <div class="mdui-dialog-title">添加日历提醒</div>
+		    <div class="mdui-dialog-content">
+		    	<div class="mdui-textfield">
+				  	<i class="mdui-icon material-icons">&#xe8af;</i>
+				  	<input class="mdui-textfield-input" type="text" placeholder="请输入要提醒的内容..."/>
+				</div>
+				
+		    </div>
+		    <div class="mdui-dialog-actions">
+		      	<button class="mdui-btn mdui-ripple" mdui-dialog-cancel>取消</button>
+		      	<button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确认</button>
+		    </div>
+		</div>
+  
 	</body>
 	<script type="text/javascript" src="../resource/js/jquery.min.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/mdui/js/mdui.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
+	<script type="text/javascript" src="../resource/js/utils.js" ></script>
 	<script src="https://cdn.bootcss.com/marked/0.3.6/marked.js"></script>
 	
 	<script type="application/javascript">
@@ -94,11 +111,16 @@
 		var inst = new mdui.Drawer('#drawer');
 		var fab = new mdui.Fab('#fab');
 		var menu = new mdui.Menu('#settingBtn', '#setting_menu');
+		var m_dialog = new mdui.Dialog('#remind_dialog');
+		
+		var userId;
 		
 		$(function(){
 			
+			userId = getUrlVars()['userId'];
+			
 			$("#authorName").text(getUrlVars()['userName']);
-			$("#userId").val(getUrlVars()['userId']);
+			$("#userId").val(userId);
 			
 			inst.close();//隐藏侧边菜单
 			$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
@@ -128,7 +150,7 @@
 				  	type: 2,
 				  	area: ['100%', '100%'],
 				  	fixed: false, //不固定
-				  	content: 'addArticle.html'
+				  	content: 'addArticle.html?userId='+userId
 				});
 			});
 			
@@ -143,19 +165,17 @@
 		  	inst.toggle();
 		});
 		
-		//获取url的参数
-		function getUrlVars() {
-		    var vars = [], hash;
-		    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-		    for (var i = 0; i < hashes.length; i++) {
-		        hash = hashes[i].split('=');
-		        vars.push(hash[0]);
-		        vars[hash[0]] = hash[1];
-		    }
-    	return vars;
-		}
+		//添加提醒
+		document.getElementById('addRemind').addEventListener('click', function () {
+		  	m_dialog.open();
+		});
 		
-
+		var r_dialog = document.getElementById('remind_dialog');
+		
+		r_dialog.addEventListener('confirm.mdui.dialog', function () {
+		  	alert("ok");
+		});
+		
 	</script>
 	
 </html>
