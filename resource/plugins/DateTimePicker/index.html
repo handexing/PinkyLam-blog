@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>Bootstrap DateTimePicker(移动端)</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0">
+<link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/moment.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    // date time picker
+    if($(".iDate.full").length>0){
+        $(".iDate.full").datetimepicker({
+            locale: "zh-cn",
+            format: "YYYY-MM-DD a hh:mm",
+            dayViewHeaderFormat: "YYYY年 MMMM"
+        });
+    }
+    if($(".iDate.date").length>0){
+        $(".iDate.date").datetimepicker({
+            locale:"zh-cn",
+            format:"YYYY-MM-DD",
+            dayViewHeaderFormat:"YYYY年 MMMM"
+        });
+    }
+})
+</script>
+</head>
+<body style="padding: 30px">
+<div class="iDate full">
+	<input type="text">
+	 <button type="button" class="addOn"></button>
+</div>
+<div class="iDate date">
+	<input type="text">
+	 <button type="button" class="addOn"></button>
+</div>
+</body>
+</html>
