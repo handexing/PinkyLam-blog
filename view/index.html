@@ -6,6 +6,7 @@
 		
 	<link rel="stylesheet" href="../resource/plugins/mdui/css/mdui.min.css" />
 	<link rel="stylesheet" href="../resource/css/index.css" />
+	<link rel="stylesheet" href="../resource/plugins/DateTimePicker/css/styles.css" />
 	
 	</head>
 	
@@ -84,14 +85,18 @@
   		</div>
   		
   		<!--添加提醒-->
-  		<div class="mdui-dialog" id="remind_dialog">
+  		<div class="mdui-dialog" id="remind_dialog" style="width: 40%;">
 		    <div class="mdui-dialog-title">添加日历提醒</div>
 		    <div class="mdui-dialog-content">
 		    	<div class="mdui-textfield">
 				  	<i class="mdui-icon material-icons">&#xe8af;</i>
-				  	<input class="mdui-textfield-input" type="text" placeholder="请输入要提醒的内容..."/>
+				  	<input class="mdui-textfield-input" type="text" placeholder="请输入要提醒的内容..." id="describe"/>
 				</div>
-				
+				&nbsp;<i class="mdui-icon material-icons">&#xe425;</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<div class="iDate full" style="width: 88%;">
+					<input type="text" id="remindTime">
+					<button type="button" class="addOn"></button>
+				</div>
 		    </div>
 		    <div class="mdui-dialog-actions">
 		      	<button class="mdui-btn mdui-ripple" mdui-dialog-cancel>取消</button>
@@ -105,75 +110,18 @@
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
 	<script type="text/javascript" src="../resource/js/utils.js" ></script>
 	<script src="https://cdn.bootcss.com/marked/0.3.6/marked.js"></script>
+	<script type="text/javascript" src="../resource/plugins/DateTimePicker/js/moment.js"></script>
+	<script type="text/javascript" src="../resource/plugins/DateTimePicker/js/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" src="../resource/js/indexConfig.js" ></script>
 	
 	<script type="application/javascript">
 		
-		var inst = new mdui.Drawer('#drawer');
-		var fab = new mdui.Fab('#fab');
-		var menu = new mdui.Menu('#settingBtn', '#setting_menu');
-		var m_dialog = new mdui.Dialog('#remind_dialog');
-		
-		var userId;
-		
 		$(function(){
 			
-			userId = getUrlVars()['userId'];
+			$.getJSON("config.json", function (data) {
+				new indexConfig(data);
+	    	});
 			
-			$("#authorName").text(getUrlVars()['userName']);
-			$("#userId").val(userId);
-			
-			inst.close();//隐藏侧边菜单
-			$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
-			
-			$('#home_panel').bind('click',function(){
-				$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
-			});
-			
-			$('#article_panel').bind('click',function(){
-				$("#m_Iframe").attr("src","article.html").attr("name","article");
-			});
-			
-			$('#cates_label_panel').bind('click',function(){
-				$("#m_Iframe").attr("src","catesLabel.html").attr("name","catesLabel");
-			});
-			
-			$('#file_panel').bind('click',function(){
-				$("#m_Iframe").attr("src","filePage.html").attr("name","filePage");
-			});
-			
-			
-			//添加文章
-			$('#addArticle').bind('click',function(){
-				layer.open({
-					title :'添加文章',
-					maxmin:false,
-				  	type: 2,
-				  	area: ['100%', '100%'],
-				  	fixed: false, //不固定
-				  	content: 'addArticle.html?userId='+userId
-				});
-			});
-			
-		});
-
-		document.getElementById('settingBtn').addEventListener('click', function () {
-		  	menu.open();
-		});
-				
-		//左侧菜单
-		document.getElementById('toggle').addEventListener('click', function () {
-		  	inst.toggle();
-		});
-		
-		//添加提醒
-		document.getElementById('addRemind').addEventListener('click', function () {
-		  	m_dialog.open();
-		});
-		
-		var r_dialog = document.getElementById('remind_dialog');
-		
-		r_dialog.addEventListener('confirm.mdui.dialog', function () {
-		  	alert("ok");
 		});
 		
 	</script>

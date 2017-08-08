@@ -111,13 +111,13 @@
 	<script type="text/javascript" src="../resource/plugins/mdui/js/mdui.js" ></script>
 	<script type="text/javascript" src="../resource/plugins/layer/2.4/layer.js" ></script>
 	<script type="application/javascript" src="../resource/plugins/simple-calendar/simple-calendar.js"></script>
-	<script type="text/javascript" src="../resource/js/indexConfig.js" ></script>
+	<script type="text/javascript" src="../resource/js/welcomeConfig.js" ></script>
 	
 	<script type="application/javascript">
 		
 		$(function(){
 			$.getJSON("config.json", function (data) {
-				new indexConfig(data);
+				new welcomeConfig(data);
 	    	});
 	    });
 		

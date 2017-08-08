@@ -1,63 +1,122 @@
 /**
  * 首页管理
  */
-function indexConfig(data,user){
+function indexConfig(data){
 	
 	var self=this;
 	var userId;
+	
+	var inst = new mdui.Drawer('#drawer');
+	var fab = new mdui.Fab('#fab');
+	var menu = new mdui.Menu('#settingBtn', '#setting_menu');
+	var m_dialog = new mdui.Dialog('#remind_dialog');
+	var r_dialog = document.getElementById('remind_dialog');
+	
 
 	this.init=function(){
 		
-		//获取父窗口用户标识ID
-		userId = window.parent.document.getElementById('userId').value;
+		userId = getUrlVars()['userId'];
 		
-		$.post(data.host.url+"index/getMySelfInfo/"+userId,{},function(data){
-			if(data.success){
-				var result = data.data;
-//				alert(JSON.stringify(result));
-				$("#articleCnt").text(result.articleCnt);
-				$("#articleDesc").text("已经写了"+result.articleCnt+"篇文章了，继续努力！");
-				$("#attachCnt").text(result.attachCnt);
-				$("#attachDesc").text("已经上传了"+result.attachCnt+"个附件！");
-				$("#writingTime").text(Math.ceil(result.writingTime/60));
-				$("#writingTimeDesc").text("写作时间大概已经花费"+Math.ceil(result.writingTime/60)+"分钟！");
-				$("#commentCnt").text(result.commentCnt);
-				$("commentDesc").text("文章累计评论共"+result.commentCnt+"次！");
-			} 
+		$("#authorName").text(getUrlVars()['userName']);
+		$("#userId").val(userId);
+		
+		inst.close();//隐藏侧边菜单
+		$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
+			
+		$('#home_panel').bind('click',function(){
+			$("#m_Iframe").attr("src","welcome.html").attr("name","welcome");
+		});
+			
+		$('#article_panel').bind('click',function(){
+			$("#m_Iframe").attr("src","article.html").attr("name","article");
+		});
+			
+		$('#cates_label_panel').bind('click',function(){
+			$("#m_Iframe").attr("src","catesLabel.html").attr("name","catesLabel");
+		});
+			
+		$('#file_panel').bind('click',function(){
+			$("#m_Iframe").attr("src","filePage.html").attr("name","filePage");
+		});
+			
+		if($(".iDate.full").length>0){
+		    $(".iDate.full").datetimepicker({
+		        locale: "zh-cn",
+		        format: "YYYY-MM-DD HH:mm:ss",
+		        dayViewHeaderFormat: "YYYY年 MMMM"
+		    });
+    	}
+			
+		//添加文章
+		$('#addArticle').bind('click',function(){
+			layer.open({
+				title :'添加文章',
+				maxmin:false,
+				type: 2,
+				area: ['100%', '100%'],
+				fixed: false, //不固定
+				content: 'addArticle.html?userId='+userId
+			});
 		});
 		
-		$.post(data.host.url+"article/getLatelyArticleList/"+userId,{},function(data){
-			if(data.success){
-				var result = data.data;
-				if(result.length!=0){
-//					alert(JSON.stringify(result));
-					var html = "";
-					$.each(result, function(index, itemobj) {
-						var id = result[index].id;
-						var title = result[index].title;
-						var subtitle = result[index].subtitle;
-						
-						html += "<div class=\"mdui-card mdui-col-xs-3\">";
-							html += "<div class=\"mdui-card-media\">";
-							    html += "<img src=\"../resource/img/head.gif\"/>";
-							    html += "<div class=\"mdui-card-menu\">";
-							      	html += "<button class=\"mdui-btn mdui-btn-icon mdui-text-color-white\"><i class=\"mdui-icon material-icons\">&#xe80d;</i></button>";
-							    html += "</div>";
-							  	html += "<div class=\"mdui-card-media-covered\">";
-							      	html += "<div class=\"mdui-card-primary\">";
-							        	html += "<div class=\"mdui-card-primary-title\" style=\"font-size:18px;\">"+title+"</div>";
-							      	html += "</div>";
-							    html += "</div>";
-							html += "</div>";
-							html += "<div class=\"mdui-card-content\">"+subtitle+"</div>";
-						html += "</div>";
-										
-					});
-					$("#tab1-content").html(html);
-				}else{
-					$("#tab1-content").html("<p style=\"font-weight: 400;font-size: 25px;margin-left: 40%;margin-top: 200px;\">近期还没有写一篇文章...</p>");
+		document.getElementById('settingBtn').addEventListener('click', function () {
+		  	menu.open();
+		});
+				
+		//左侧菜单
+		document.getElementById('toggle').addEventListener('click', function () {
+		  	inst.toggle();
+		});
+		
+		//添加提醒
+		document.getElementById('addRemind').addEventListener('click', function () {
+		  	m_dialog.open();
+		});
+		
+		r_dialog.addEventListener('confirm.mdui.dialog', function () {
+			
+			var describe = $.trim($("#describe").val());
+			var remindTime = $.trim($("#remindTime").val());
+			
+			if(describe==null || describe==""){
+				layer.msg('提醒描述不能为空！', {icon: 7});
+				return;
+			}
+			
+			if(remindTime==null || remindTime==""){
+				layer.msg('提醒时间不能为空！', {icon: 7});
+				return;
+			}
+			
+			var memoRemind={};
+			memoRemind.authorId = userId;
+			memoRemind.describe = describe;
+			memoRemind.remindTime = remindTime;
+			
+			alert(JSON.stringify(memoRemind));
+			
+			$.ajax({
+				url:data.host.url+'remind/saveMemoRemind',
+	            type: "POST",
+	            dataType: "json",//跨域ajax请求,返回数据格式为json
+	            cache: false,
+	            timeout: 10000,//请求超时时间,单位为毫秒
+	            async: true,
+	            global: false,//禁用Jquery全局事件
+	            scriptCharset: 'UTF-8',
+	            //processData : false,         // 告诉jQuery不要去处理发送的数据
+	            contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
+				data:JSON.stringify(memoRemind),
+				success:function(responseData, status){
+					if(responseData.success){
+						layer.msg('添加成功！', {icon: 1});
+					}else{
+						layer.msg('添加失败！', {icon: 5});
+					}
+	
 				}
-			} 
+			});
+			
 		});
 
 	}
