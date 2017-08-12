@@ -9,6 +9,8 @@
 - editor(markdown插件)
 - redis
 
+## PinkyLam-blog 使用教程
+[使用教程](https://github.com/handexing/PinkyLam-blog/raw/master/doc/INSTALL_DOC.md)
 
 ## 项目日志
 - 开发登录界面和首页（*2017-06-22*）
