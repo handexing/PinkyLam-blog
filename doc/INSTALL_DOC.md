@@ -16,6 +16,7 @@
 - 修改项目配置，在pinkyLam-common里面application.properties文件。
 - 用maven将项目打成可执行的jar包。
 - 上传到服务器。然后只需要**java -jar your.jar**就可以启动项目了。访问*http:xx.xx.xx.xx:8888*测试服务是否已启动。
+- 查看服务是否启动成功 `http://xx.xx.xx.xx:8888/server/blog`
 
 ## PC端
 
