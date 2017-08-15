@@ -18,6 +18,7 @@ function fileConfig(data){
 	this.attachList=function(pageNum,flag){
 		
 		var host = data.host.url;
+		var nginx_ip = data.nginx.ip;
 		
 		$.post(host+"file/attachList",{"userId":userId,"page":pageNum},function(data){
 			
@@ -30,7 +31,7 @@ function fileConfig(data){
 				var type=result[index].type;
 				var url=result[index].url;
 				
-				var imgPath = host+url;
+				var imgPath = "http://"+nginx_ip+"/"+url;
 
 				htmlContent +="<div class=\"mdui-col mdui-m-t-2 mdui-hoverable\"  style=\"border-radius:5px;\">";
 				if(type == "image"){

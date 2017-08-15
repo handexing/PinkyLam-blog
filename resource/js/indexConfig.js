@@ -93,8 +93,6 @@ function indexConfig(data){
 			memoRemind.describe = describe;
 			memoRemind.remindTime = remindTime;
 			
-			alert(JSON.stringify(memoRemind));
-			
 			$.ajax({
 				url:data.host.url+'remind/saveMemoRemind',
 	            type: "POST",
@@ -109,6 +107,7 @@ function indexConfig(data){
 				data:JSON.stringify(memoRemind),
 				success:function(responseData, status){
 					if(responseData.success){
+						window.location.reload();
 						layer.msg('添加成功！', {icon: 1});
 					}else{
 						layer.msg('添加失败！', {icon: 5});
