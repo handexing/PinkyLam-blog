@@ -23,8 +23,8 @@ function welcomeConfig(data){
 				$("#attachDesc").text("已经上传了"+result.attachCnt+"个附件！");
 				$("#writingTime").text(Math.ceil(result.writingTime/60));
 				$("#writingTimeDesc").text("写作时间大概已经花费"+Math.ceil(result.writingTime/60)+"分钟！");
-				$("#commentCnt").text(result.commentCnt);
-				$("commentDesc").text("文章累计评论共"+result.commentCnt+"次！");
+				$("#remindCnt").text(result.remindCnt);
+				$("#remindDesc").text("备忘录提醒共"+result.remindCnt+"条！");
 			} 
 		});
 		
@@ -76,15 +76,17 @@ function welcomeConfig(data){
 						var remindTime = result[index].remindTime;
 						var color = random(0,10);
 						
-						html += "<label class=\"mdui-list-item mdui-ripple m_remind\" data="+id+">";
+						html += "<label class=\"mdui-list-item mdui-ripple\">";
 				    		html += "<div class=\"mdui-list-item-avatar mdui-color-"+colors[color]+"\">"+(index+1)+"</div>";
-				    		html += "<div class=\"mdui-list-item-content\">"+describe+"</div>";
-				    		html += "<div class=\"mdui-checkbox\">";
-				      			html += "<input id="+id+" type=\"checkbox\"/>";
-				      			html += "<i class=\"mdui-checkbox-icon\"></i>";
-				    		html += "</div>";
-				  		html += "</label>";
-										
+							html += "<div class=\"mdui-list-item-content\">";
+							    html += "<div class=\"mdui-list-item-title\">"+describe+"</div>";
+							    html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\"><span class=\"mdui-text-color-black-secondary\">提醒时间：</span>"+remindTime+"</div>";
+							html += "</div>";
+							html += "<label class=\"mdui-switch\">";
+						        html += "<input class=\"m_remind\" data="+id+" type=\"checkbox\"/>";
+						        html += "<i class=\"mdui-switch-icon\"></i>";
+						    html += "</label>";
+			  			html += "</label>";
 					});
 					$("#memoRemind").html(html);
 				}else{
@@ -93,14 +95,46 @@ function welcomeConfig(data){
 			} 
 		});
 		
-		$('.m_remind').bind('click',function(){
+		$("body").on("click",".m_remind",function(){
 			var id = $(this).attr("data"); 
 //			alert(id);
-//			if ($("#"+id).attr("checked") == "checked") {
-//				alert(id); 
-//			}
-		});
-		
+//			layer.confirm('确认关闭提醒吗？', {
+//		  		btn: ['确认','取消'] 
+//				}, function(){
+//					$.post(data.host.url+"remind/closeRemind/"+id+"/"+userId,{},function(data){
+//						if(data.success){
+//						var result = data.data;
+//						if(result.length!=0){
+//							
+//							var html = "";
+//							$.each(result, function(index, itemobj) {
+//								var id = result[index].id;
+//								var describe = result[index].describe;
+//								var remindTime = result[index].remindTime;
+//								var color = random(0,10);
+//								
+//								html += "<label class=\"mdui-list-item mdui-ripple m_remind\" data="+id+">";
+//						    		html += "<div class=\"mdui-list-item-avatar mdui-color-"+colors[color]+"\">"+(index+1)+"</div>";
+//									html += "<div class=\"mdui-list-item-content\">";
+//									    html += "<div class=\"mdui-list-item-title\">"+describe+"</div>";
+//									    html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\"><span class=\"mdui-text-color-black-secondary\">提醒时间：</span>"+remindTime+"</div>";
+//									html += "</div>";
+//									html += "<label class=\"mdui-switch\">";
+//								        html += "<input type=\"checkbox\"/>";
+//								        html += "<i class=\"mdui-switch-icon\"></i>";
+//								    html += "</label>";
+//					  			html += "</label>";
+//							});
+//							$("#memoRemind").html(html);
+//						}else{
+//							$("#memoRemind").html("<p style=\"font-weight: 400;font-size: 25px;margin-left: 40%;margin-top: 200px;\">未有提醒事项...</p>");
+//						}
+//					}
+//					});
+//				}, function(){
+//			});
+        })    
+        
 	}
 	
 	self.init();
