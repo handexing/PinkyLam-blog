@@ -139,6 +139,13 @@ function welcomeConfig(data){
 //			});
         })    
         
+        var schedule = require("node-schedule");
+    	var date = new Date(2017,8,19,14,18,0);
+	    var j = schedule.scheduleJob(date, function(){
+	　　　　alert("start");
+	　 	});
+    	j.cancel();
+        
 	}
 	
 	self.init();
