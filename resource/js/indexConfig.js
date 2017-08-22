@@ -12,6 +12,7 @@ function indexConfig(data){
 	var m_dialog = new mdui.Dialog('#remind_dialog');
 	var r_dialog = document.getElementById('remind_dialog');
 	
+	var redis = require("redis");
 
 	this.init=function(){
 		
@@ -73,6 +74,11 @@ function indexConfig(data){
 		  	m_dialog.open();
 		});
 		
+		client = redis.createClient(data.redis.port, data.redis.ip);
+		client.on("error", function(err){
+		    console.log("Error: " + err);
+		});
+		
 		r_dialog.addEventListener('confirm.mdui.dialog', function () {
 			
 			var describe = $.trim($("#describe").val());
@@ -92,6 +98,18 @@ function indexConfig(data){
 			memoRemind.authorId = userId;
 			memoRemind.describe = describe;
 			memoRemind.remindTime = remindTime;
+			
+//			var info = {};
+//      	info.baidu = 'www.baidu.com';
+//      	info.sina  = 'www.sina.com';
+//      	info.qq    = 'www.qq.com';
+//      	client.hmset('site', info);
+        
+//	        client.hgetall("site", function(err,res){
+//	        	alert(JSON.stringify(res));
+//	        });
+//			
+//			client.set("user", JSON.stringify(data.data));
 			
 			$.ajax({
 				url:data.host.url+'remind/saveMemoRemind',

@@ -6,6 +6,9 @@ function welcomeConfig(data){
 	var self=this;
 	var userId;
 	
+//	var redis = require("redis");
+	var schedule = require("node-schedule");
+	
 	var colors = new Array("pink","red","orange","blue","brown","purple","teal","green","cyan","amber","deep-orange","lime")
 
 	this.init=function(){
@@ -139,7 +142,12 @@ function welcomeConfig(data){
 //			});
         })    
         
-        var schedule = require("node-schedule");
+        
+    	client = redis.createClient(data.redis.port, data.redis.ip);
+		client.on("error", function(err){
+		    console.log("Error: " + err);
+		});
+        
     	var date = new Date(2017,8,19,14,18,0);
 	    var j = schedule.scheduleJob(date, function(){
 	　　　　alert("start");
