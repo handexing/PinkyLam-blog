@@ -12,8 +12,6 @@ function indexConfig(data){
 	var m_dialog = new mdui.Dialog('#remind_dialog');
 	var r_dialog = document.getElementById('remind_dialog');
 	
-	var redis = require("redis");
-
 	this.init=function(){
 		
 		userId = getUrlVars()['userId'];
@@ -43,7 +41,7 @@ function indexConfig(data){
 		if($(".iDate.full").length>0){
 		    $(".iDate.full").datetimepicker({
 		        locale: "zh-cn",
-		        format: "YYYY-MM-DD HH:mm:ss",
+		        format: "YYYY-MM-DD HH:mm",
 		        dayViewHeaderFormat: "YYYY年 MMMM"
 		    });
     	}
@@ -98,18 +96,6 @@ function indexConfig(data){
 			memoRemind.authorId = userId;
 			memoRemind.describe = describe;
 			memoRemind.remindTime = remindTime;
-			
-//			var info = {};
-//      	info.baidu = 'www.baidu.com';
-//      	info.sina  = 'www.sina.com';
-//      	info.qq    = 'www.qq.com';
-//      	client.hmset('site', info);
-        
-//	        client.hgetall("site", function(err,res){
-//	        	alert(JSON.stringify(res));
-//	        });
-//			
-//			client.set("user", JSON.stringify(data.data));
 			
 			$.ajax({
 				url:data.host.url+'remind/saveMemoRemind',

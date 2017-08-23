@@ -6,12 +6,21 @@ function welcomeConfig(data){
 	var self=this;
 	var userId;
 	
-//	var redis = require("redis");
+	var redis = require("redis");
 	var schedule = require("node-schedule");
+	
+	var m_dialog = new mdui.Dialog('#remind_dialog');
+	var r_dialog = document.getElementById('remind_dialog');
 	
 	var colors = new Array("pink","red","orange","blue","brown","purple","teal","green","cyan","amber","deep-orange","lime")
 
 	this.init=function(){
+		
+		//配置redis
+		client = redis.createClient(data.redis.port, data.redis.ip);
+		client.on("error", function(err){
+		    console.log("Error: " + err);
+		});
 		
 		//获取父窗口用户标识ID
 		userId = window.parent.document.getElementById('userId').value;
@@ -70,6 +79,7 @@ function welcomeConfig(data){
 		$.post(data.host.url+"remind/getMemoRemindList/"+userId,{},function(data){
 			if(data.success){
 				var result = data.data;
+				client.set("memoRemind", JSON.stringify(result));
 				if(result.length!=0){
 					
 					var html = "";
@@ -107,6 +117,7 @@ function welcomeConfig(data){
 					$.post(data.host.url+"remind/closeRemind/"+id+"/"+userId,{},function(data){
 						if(data.success){
 							var result = data.data;
+							client.set("memoRemind", JSON.stringify(result));
 							if(result.length!=0){
 								
 								var html = "";
@@ -142,18 +153,32 @@ function welcomeConfig(data){
 //			});
         })    
         
-        
-    	client = redis.createClient(data.redis.port, data.redis.ip);
-		client.on("error", function(err){
-		    console.log("Error: " + err);
+        //每十秒查询redis一次，获取日历提醒数据
+		var j = schedule.scheduleJob('*/1 * * * *', function(){
+			client.get("memoRemind", function(err, res) {
+			    var result = JSON.parse(res);
+			    $.each(result, function(index, itemobj) {
+			    	var id = result[index].id;
+					var describe = result[index].describe;
+					var remindTime = result[index].remindTime;
+					var status = result[index].status;
+					
+					var dateTime = getDateTime();//获取当前时间
+					
+					if(compareDate(dateTime,remindTime)){
+						$("#remindTitle").text(describe);
+						m_dialog.open();
+						return false;
+					}
+					
+			    });
+			});
 		});
-        
-    	var date = new Date(2017,8,19,14,18,0);
-	    var j = schedule.scheduleJob(date, function(){
-	　　　　alert("start");
-	　 	});
-    	j.cancel();
-        
+		
+		r_dialog.addEventListener('confirm.mdui.dialog', function () {
+			alert("ok");
+		});
+
 	}
 	
 	self.init();
