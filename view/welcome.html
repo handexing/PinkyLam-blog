@@ -7,7 +7,8 @@
 		<link rel="stylesheet" href="../resource/plugins/mdui/css/mdui.min.css" />
 		<link rel="stylesheet" href="../resource/css/index.css" />
 		<link rel="stylesheet" type="text/css" href="../resource/plugins/simple-calendar/simple-calendar.css">
-	
+		<link rel="stylesheet" type="text/css" href="../resource/css/memoRemind.css"/>
+		
 	</head>
 	<body>
 		<div class="mdui-tab mdui-tab-full-width" mdui-tab>
@@ -70,10 +71,32 @@
 		</div>
 		
 		<!--日历提醒-->
-  		<div class="mdui-dialog" id="remind_dialog" style="width: 40%;">
-		    <div class="mdui-dialog-title" id="remindTitle">添加日历提醒</div>
+  		<div class="mdui-dialog" id="remind_dialog" style="width: 40%;background: #8fd5d5;">
+		    <div class="mdui-dialog-title" id="remindTitle" style="color: white;">添加日历提醒</div>
 		    <div class="mdui-dialog-content">
-				
+		    	<input type="hidden" id="remindId" />
+				<div class="contain-clock">
+					<div class="face-1">
+					    <div class="hour"></div>
+					    <div class="minute"></div>
+					    <div class="second"></div>
+					    <div class="center"></div>
+				  	</div> 
+				  	<div class="face-2">
+					    <div class="line"></div>
+					    <div class="line line-2"></div>
+					    <div class="line line-3"></div>
+					    <div class="line line-4"></div>   
+					    <div class="line line-5"></div>
+					    <div class="line line-6"></div>
+				  	</div>
+				  	<div class="arm"></div>
+				  	<div class="arm arm-2"></div>
+				  	<div class="bell"></div>
+				  	<div class="bell bell-2"></div>
+				  	<div class="hammer"></div>
+				  	<div class="handle"></div>
+				</div>
 		    </div>
 		    <div class="mdui-dialog-actions">
 		      	<!--<button class="mdui-btn mdui-ripple" mdui-dialog-cancel>取消</button>-->

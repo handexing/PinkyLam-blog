@@ -167,6 +167,7 @@ function welcomeConfig(data){
 					
 					if(compareDate(dateTime,remindTime)){
 						$("#remindTitle").text(describe);
+						$("#remindId").val(id);
 						m_dialog.open();
 						return false;
 					}
@@ -176,12 +177,44 @@ function welcomeConfig(data){
 		});
 		
 		r_dialog.addEventListener('confirm.mdui.dialog', function () {
-			alert("ok");
+			var id = $("#remindId").val();
+			$.post(data.host.url+"remind/closeRemind/"+id+"/"+userId,{},function(data){
+						if(data.success){
+							var result = data.data;
+							client.set("memoRemind", JSON.stringify(result));
+							if(result.length!=0){
+								var html = "";
+								$.each(result, function(index, itemobj) {
+									var id = result[index].id;
+									var describe = result[index].describe;
+									var remindTime = result[index].remindTime;
+									var color = random(0,10);
+									
+									html += "<label class=\"mdui-list-item mdui-ripple m_remind\" data="+id+">";
+							    		html += "<div class=\"mdui-list-item-avatar mdui-color-"+colors[color]+"\">"+(index+1)+"</div>";
+										html += "<div class=\"mdui-list-item-content\">";
+										    html += "<div class=\"mdui-list-item-title\">"+describe+"</div>";
+										    html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\"><span class=\"mdui-text-color-black-secondary\">提醒时间：</span>"+remindTime+"</div>";
+										html += "</div>";
+										html += "<label class=\"mdui-switch\">";
+									        html += "<input type=\"checkbox\"/>";
+									        html += "<i class=\"mdui-switch-icon\"></i>";
+									    html += "</label>";
+						  			html += "</label>";
+								});
+								$("#memoRemind").html(html);
+							}else{
+								$("#memoRemind").html("<p style=\"font-weight: 400;font-size: 25px;margin-left: 40%;margin-top: 200px;\">未有提醒事项...</p>");
+							}
+						}
+					});
 		});
 
 	}
 	
 	self.init();
+	
+//	m_dialog.open();
 	
 }
 

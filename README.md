@@ -34,7 +34,7 @@
 - **重构代码，去掉redis缓存，将在下个版本中在添加.**完成首页面板“近期文章开发”，修改“日历提醒功能”（*2017-08-04*）
 - 添加日历提醒功能（*2017-08-07*）
 - 修改上上附件功能，附件从nginx上获取,开发日历提醒的列表展示（*2017-08-15*）
-- 修改日历提醒，这周把版本1开发完！（*2017-08-22*）
+- 修改日历提醒（*2017-08-27*）
 
 ## 项目配置
 
@@ -64,6 +64,8 @@
 #### 仪表盘 -日历提醒
 
 ![日历提醒](https://github.com/handexing/PinkyLam-blog/raw/master/preview/m_calendar.png)
+
+![日历提醒](https://github.com/handexing/PinkyLam-blog/raw/master/preview/remind.png)
 
 ### 文章管理
 

@@ -1,6 +1,6 @@
 .contain-clock {
   position: relative;
-  margin: -100px auto;
+  margin: 15px auto;
   width: 155px;
   height: 200px;
   -webkit-animation: alarm-2 1ms infinite;
@@ -18,7 +18,7 @@
 }
 .face-2 {
   position: relative;
-  margin: 200px auto;
+  margin: 70px auto;
   z-index: 2;
   background: white;
   border: 15px solid #ed6e46;
