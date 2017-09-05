@@ -21,7 +21,8 @@
 ## PC端
 
 - 将[PC端](https://github.com/handexing/PinkyLam-blog)代码clone到本地。
-- 修改view/config.json 项目配置文件，修改成你的服务器请求地址。（redis不需要修改！！！）
+- 安装redis。
+- 修改view/config.json 项目配置文件，修改成你的服务器请求地址。
 - 需要下载[nwjs](https://nwjs.io/),下载完成解压即可。
 - 打包成exe文件[打包教程](http://www.cnblogs.com/soaringEveryday/p/4950088.html),mac的可以自己查下怎么打包。
 
